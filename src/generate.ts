@@ -75,5 +75,8 @@ $$
     "https://raw.githubusercontent.com/lino-levan/pyro/main/www/static/icon.png",
   );
 
-  Deno.writeTextFileSync(join(path, "static", "icon.png"), await icon.text());
+  Deno.writeFileSync(
+    join(path, "static", "icon.png"),
+    new Uint8Array(await icon.arrayBuffer()),
+  );
 }
