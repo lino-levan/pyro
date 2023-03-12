@@ -1,0 +1,11 @@
+{
+  "tasks": {
+    "build": "pyro build",
+    "dev": "pyro dev"
+  },
+  "imports": {},
+  "pyro": {
+    "title": "Pyro",
+    "github": "https://github.com/lino-levan/pyro"
+  }
+}
