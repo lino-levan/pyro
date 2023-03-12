@@ -118,13 +118,13 @@ _italicized text_
 ## HTML
 
 ```md
-<image src="/icon.svg" width="100px">
+<image src="/icon.png" width="100px">
 
 <button class="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded" onClick="alert('hi!')">Click
 Me</button>
 ```
 
-<image src="/icon.svg" width="100px">
+<image src="/icon.png" width="100px">
 
 <button class="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded" onClick="alert('hi!')">Click
 Me</button>

@@ -72,8 +72,8 @@ $$
   );
 
   const icon = await fetch(
-    "https://raw.githubusercontent.com/denolib/high-res-deno-logo/master/deno_hr_circle.svg",
+    "https://raw.githubusercontent.com/lino-levan/pyro/main/www/static/icon.png",
   );
 
-  Deno.writeTextFileSync(join(path, "static", "icon.svg"), await icon.text());
+  Deno.writeTextFileSync(join(path, "static", "icon.png"), await icon.text());
 }

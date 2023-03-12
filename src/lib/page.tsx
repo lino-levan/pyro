@@ -100,12 +100,12 @@ export function page(options: {
         />
         <script src="https://cdn.twind.style" />
         <meta name="description" content={options.page.description} />
-        <link rel="icon" href="/icon.svg" />
+        <link rel="icon" type="image/png" href="/icon.png" />
       </head>
       <body class="flex flex-col">
         <header class="w-full h-16 shadow-sm flex items-center px-4 justify-between">
           <h1 class="font-semibold text-lg text-gray-800 flex items-center gap-2">
-            <image src="/icon.svg" class="w-8 h-8" />
+            <image src="/icon.png" class="w-8 h-8" />
             {options.config.title}
           </h1>
           <div class="flex items-center">

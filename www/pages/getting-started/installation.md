@@ -43,7 +43,7 @@ my-pyro-site
 │   │   └── submenu.md
 │   └── index.md
 ├── static
-│   └── icon.svg
+│   └── icon.png
 └── deno.jsonc
 ```
 

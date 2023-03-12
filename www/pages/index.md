@@ -15,6 +15,8 @@ customizations are built-in with zero config required.
 🧐 Pyro at its core is a **static-site generator**. That means it can be
 deployed **anywhere**.
 
+![Pyro Logo](/pyro_bg.png)
+
 ## Getting started
 
 Understand Pyro in **5 minutes** by trying it out!
