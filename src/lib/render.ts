@@ -7,6 +7,7 @@ import type { Config } from "./types.ts";
 
 import "https://esm.sh/prismjs@1.29.0/components/prism-json?no-check";
 import "https://esm.sh/prismjs@1.29.0/components/prism-bash?no-check";
+import "https://esm.sh/prismjs@1.29.0/components/prism-yaml?no-check";
 
 export function render(config: Config, path: string) {
   const markdown = resolve_file(resolve("pages", path));
