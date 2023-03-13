@@ -1,20 +1,14 @@
 import { join, resolve } from "std/path/mod.ts";
 import { extract } from "std/encoding/front_matter/any.ts";
 import { readFileSync } from "../utils.ts";
-
-export interface RouteMap {
-  title: string;
-  url: string;
-  index: number;
-  sub_route_map?: RouteMap[];
-}
+import type { RouteMap } from "./types.ts";
 
 export function resolve_file(path: string) {
   return readFileSync(
     resolve(path + ".md"),
-    // resolve(path + ".mdx"),
+    resolve(path + ".mdx"),
     resolve(path, "index.md"),
-    // resolve(path, "index.mdx"),
+    resolve(path, "index.mdx"),
   );
 }
 
@@ -22,7 +16,9 @@ export function get_route_map(directory: string, top_level = false) {
   const route_map: RouteMap[] = [];
 
   for (const entry of Deno.readDirSync(directory)) {
-    const markdown = resolve_file(join(directory, entry.name.split(".")[0]));
+    const [_, markdown] = resolve_file(
+      join(directory, entry.name.split(".")[0]),
+    );
     const frontmatter = extract(markdown);
     const extracted = resolve(directory, entry.name).match(
       /(?:.+?\/pages(.+)\.)|(?:.+?\/pages(.+))/,
