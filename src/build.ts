@@ -5,7 +5,7 @@ import { copySync } from "std/fs/copy.ts";
 import { getMagic } from "./lib/magic.ts";
 import { CSS } from "./lib/css.ts";
 
-export function build() {
+export async function build() {
   try {
     Deno.removeSync("build", {
       recursive: true,
@@ -29,7 +29,7 @@ export function build() {
     Deno.mkdirSync(join("build", folder), { recursive: true });
     Deno.writeTextFileSync(
       resolve("build", folder, "index.html"),
-      render(config, magic, folder),
+      await render(config, magic, folder),
     );
   }
 }

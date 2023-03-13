@@ -8,7 +8,7 @@ import { CSS } from "./lib/css.ts";
 export function dev() {
   const config = JSON.parse(Deno.readTextFileSync("deno.jsonc")).pyro;
 
-  serve((req) => {
+  serve(async (req) => {
     const url = new URL(req.url);
     const pathname = url.pathname.slice(1);
 
@@ -37,7 +37,7 @@ export function dev() {
     }
 
     return new Response(
-      render(config, getMagic(), resolve("pages", pathname)),
+      await render(config, getMagic(), resolve("pages", pathname)),
       {
         headers: {
           "Content-Type": "text/html; charset=utf-8",
