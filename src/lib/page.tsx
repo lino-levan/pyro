@@ -1,8 +1,10 @@
 import { CSS, KATEX_CSS, render } from "gfm";
 import type { RouteMap } from "./route_map.ts";
+import type { Config, Magic } from "./types.ts";
+
 import ChevronDown from "icons/chevron-down.tsx";
 import Github from "icons/brand-github.tsx";
-import type { Config } from "./types.ts";
+import ExternalLink from "icons/external-link.tsx";
 
 function simplify(url: string) {
   return url.replaceAll("/", "").replaceAll("-", "");
@@ -71,6 +73,7 @@ export function page(options: {
   route_map: RouteMap[];
   route: string;
   config: Config;
+  magic: Magic;
 }) {
   return (
     <html lang="en">
@@ -102,8 +105,11 @@ export function page(options: {
         <meta name="description" content={options.page.description} />
         <link rel="icon" type="image/png" href="/icon.png" />
       </head>
-      <body class="flex flex-col">
-        <header class="w-full h-16 shadow-sm flex items-center px-4 justify-between">
+      <body
+        class="flex flex-col"
+        style={{ backgroundColor: options.magic.background }}
+      >
+        <header class="w-full h-16 shadow-sm flex items-center px-4 justify-between bg-white z-10">
           <h1 class="font-semibold text-lg text-gray-800 flex items-center gap-2">
             <image src="/icon.png" class="w-8 h-8" />
             {options.config.title}
@@ -116,7 +122,7 @@ export function page(options: {
             )}
           </div>
         </header>
-        <div class="flex gap-4 flex-grow">
+        <div class="flex gap-4 flex-grow bg-white">
           <Sidebar
             class="w-64 p-2 border-r border-gray-200 pt-4 flex flex-col gap-2"
             route_map={options.route_map}
@@ -136,6 +142,51 @@ export function page(options: {
             />
           </div>
         </div>
+        {options.config.footer && (
+          <footer class="px-4 py-12 w-full flex justify-center text-gray-800 border-t bg-white">
+            <div class="max-w-screen-lg w-full flex flex-wrap justify-around">
+              <image src="/icon.png" class="w-8 h-8" />
+              {Object.entries(options.config.footer).map(([name, value]) => (
+                <div>
+                  <p class="font-bold pb-4">{name}</p>
+                  <ul class="flex flex-col gap-2">
+                    {value.map(([name, url]) => (
+                      <li>
+                        <a
+                          class="flex items-center gap-1 hover:underline"
+                          href={url}
+                        >
+                          {name}
+                          {!url.startsWith("/") && (
+                            <ExternalLink class="inline w-4" />
+                          )}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+              <div class="h-full flex flex-col justify-around">
+                {options.config.copyright && (
+                  <p class="whitespace-pre text-gray-500 text-sm">
+                    {options.config.copyright}
+                  </p>
+                )}
+                <div>
+                  {options.config.github && (
+                    <a
+                      target="_blank"
+                      class="w-min"
+                      href={options.config.github}
+                    >
+                      <Github class="text-gray-500 hover:text-gray-900" />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          </footer>
+        )}
       </body>
     </html>
   );

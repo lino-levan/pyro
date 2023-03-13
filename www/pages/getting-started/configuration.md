@@ -19,8 +19,26 @@ configuration specific to Pyro.
   "pyro": {
     // The title of the site
     "title": "Pyro",
+
     // The Github repository for the documentation site (optional)
-    "github": "https://github.com/lino-levan/pyro"
+    "github": "https://github.com/lino-levan/pyro",
+
+    // Any copyright information you want to include in the footer (optional)
+    "copyright": "Copyright © 2023 Lino Le Van\nMIT Licensed.",
+
+    // Links in the footer (optional)
+    "footer": {
+      // Header of the column
+      "Learn": [
+        // [name, url]
+        ["Introduction", "/"],
+        ["Installation", "/getting-started/installation"]
+      ],
+      "Community": [
+        ["Discord", "https://discord.gg/XJMMSSC4Fj"],
+        ["Support", "https://github.com/lino-levan/pyro/issues/new"]
+      ]
+    }
   }
 }
 ```

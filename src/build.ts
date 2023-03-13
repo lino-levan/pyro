@@ -2,6 +2,7 @@ import { walkSync } from "std/fs/walk.ts";
 import { join, resolve } from "std/path/mod.ts";
 import { render } from "./lib/render.ts";
 import { copySync } from "std/fs/copy.ts";
+import { getMagic } from "./lib/magic.ts";
 
 export function build() {
   try {
@@ -15,6 +16,7 @@ export function build() {
   copySync("./static", "./build");
 
   const config = JSON.parse(Deno.readTextFileSync("deno.jsonc")).pyro;
+  const magic = getMagic();
 
   for (const entry of walkSync("./pages", { includeDirs: false })) {
     const extracted = resolve(entry.path).match(
@@ -24,7 +26,7 @@ export function build() {
     Deno.mkdirSync(join("build", folder), { recursive: true });
     Deno.writeTextFileSync(
       resolve("build", folder, "index.html"),
-      render(config, folder),
+      render(config, magic, folder),
     );
   }
 }

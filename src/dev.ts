@@ -2,6 +2,7 @@ import { serve } from "std/http/server.ts";
 import { resolve } from "std/path/mod.ts";
 import { serveDir } from "std/http/file_server.ts";
 import { render } from "./lib/render.ts";
+import { getMagic } from "./lib/magic.ts";
 
 export function dev() {
   const config = JSON.parse(Deno.readTextFileSync("deno.jsonc")).pyro;
@@ -25,10 +26,13 @@ export function dev() {
       }
     }
 
-    return new Response(render(config, resolve("pages", pathname)), {
-      headers: {
-        "Content-Type": "text/html; charset=utf-8",
+    return new Response(
+      render(config, getMagic(), resolve("pages", pathname)),
+      {
+        headers: {
+          "Content-Type": "text/html; charset=utf-8",
+        },
       },
-    });
+    );
   });
 }

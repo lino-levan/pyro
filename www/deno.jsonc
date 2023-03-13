@@ -6,6 +6,17 @@
   "imports": {},
   "pyro": {
     "title": "Pyro",
-    "github": "https://github.com/lino-levan/pyro"
+    "github": "https://github.com/lino-levan/pyro",
+    "copyright": "Copyright © 2023 Lino Le Van\nMIT Licensed.",
+    "footer": {
+      "Learn": [
+        ["Introduction", "/"],
+        ["Installation", "/getting-started/installation"]
+      ],
+      "Community": [
+        ["Discord", "https://discord.gg/XJMMSSC4Fj"],
+        ["Support", "https://github.com/lino-levan/pyro/issues/new"]
+      ]
+    }
   }
 }
