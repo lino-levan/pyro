@@ -44,8 +44,6 @@ function getBackground() {
       }
     }
 
-    console.log("Brightest color is", brightest_color);
-
     return brightest_color;
   } catch {
     return "white";

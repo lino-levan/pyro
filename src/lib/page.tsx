@@ -1,4 +1,4 @@
-import { CSS, KATEX_CSS, render } from "gfm";
+import { render } from "gfm";
 import type { RouteMap } from "./route_map.ts";
 import type { Config, Magic } from "./types.ts";
 
@@ -79,28 +79,7 @@ export function page(options: {
     <html lang="en">
       <head>
         <title>{options.page.title} | {options.config.title}</title>
-        <style
-          dangerouslySetInnerHTML={{
-            __html: CSS + KATEX_CSS + `.markdown-body ul {
-            list-style: disc
-          }
-          .markdown-body ol {
-            list-style: numeric
-          }
-          .markdown-body table {
-            width: fit-content;
-          }
-
-          details > summary {
-            list-style: none;
-          }
-          details > summary::marker,
-          details > summary::-webkit-details-marker {
-            display: none;
-          }
-          `,
-          }}
-        />
+        <link rel="stylesheet" href="/bundle.css" />
         <script src="https://cdn.twind.style" />
         <meta name="description" content={options.page.description} />
         <link rel="icon" type="image/png" href="/icon.png" />

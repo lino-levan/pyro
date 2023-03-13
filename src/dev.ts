@@ -3,6 +3,7 @@ import { resolve } from "std/path/mod.ts";
 import { serveDir } from "std/http/file_server.ts";
 import { render } from "./lib/render.ts";
 import { getMagic } from "./lib/magic.ts";
+import { CSS } from "./lib/css.ts";
 
 export function dev() {
   const config = JSON.parse(Deno.readTextFileSync("deno.jsonc")).pyro;
@@ -10,6 +11,15 @@ export function dev() {
   serve((req) => {
     const url = new URL(req.url);
     const pathname = url.pathname.slice(1);
+
+    // Handle the bundled css
+    if (pathname === "bundle.css") {
+      return new Response(CSS, {
+        headers: {
+          "Content-Type": "text/css",
+        },
+      });
+    }
 
     // We're supposed to serve a static file
     if (pathname.includes(".")) {

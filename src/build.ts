@@ -3,6 +3,7 @@ import { join, resolve } from "std/path/mod.ts";
 import { render } from "./lib/render.ts";
 import { copySync } from "std/fs/copy.ts";
 import { getMagic } from "./lib/magic.ts";
+import { CSS } from "./lib/css.ts";
 
 export function build() {
   try {
@@ -14,6 +15,8 @@ export function build() {
   }
 
   copySync("./static", "./build");
+
+  Deno.writeTextFileSync("./build/bundle.css", CSS);
 
   const config = JSON.parse(Deno.readTextFileSync("deno.jsonc")).pyro;
   const magic = getMagic();
