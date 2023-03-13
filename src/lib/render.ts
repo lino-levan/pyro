@@ -9,7 +9,7 @@ import "https://esm.sh/prismjs@1.29.0/components/prism-json?no-check";
 import "https://esm.sh/prismjs@1.29.0/components/prism-bash?no-check";
 import "https://esm.sh/prismjs@1.29.0/components/prism-yaml?no-check";
 
-export function render(config: Config, magic: Magic, path: string) {
+export async function render(config: Config, magic: Magic, path: string) {
   const markdown = resolve_file(resolve("pages", path));
   const frontmatter = extract(markdown);
   const route_map = get_route_map(resolve("pages"), true);
@@ -19,7 +19,7 @@ export function render(config: Config, magic: Magic, path: string) {
     "No Description";
 
   return "<!DOCTYPE html>\n" + renderToString(
-    page({
+    await page({
       page: { title, description },
       markdown,
       route_map,

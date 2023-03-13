@@ -5,6 +5,7 @@ import type { Config, Magic } from "./types.ts";
 import ChevronDown from "icons/chevron-down.tsx";
 import Github from "icons/brand-github.tsx";
 import ExternalLink from "icons/external-link.tsx";
+import { renderMD } from "../utils.ts";
 
 function simplify(url: string) {
   return url.replaceAll("/", "").replaceAll("-", "");
@@ -64,7 +65,7 @@ function Sidebar(
   );
 }
 
-export function page(options: {
+export async function page(options: {
   page: {
     title: string;
     description: string;
@@ -114,9 +115,7 @@ export function page(options: {
             <div
               class="markdown-body"
               dangerouslySetInnerHTML={{
-                __html: render(options.markdown.replace(/^---.+?---/s, ""), {
-                  disableHtmlSanitization: true,
-                }),
+                __html: await renderMD(options.markdown),
               }}
             />
           </div>
