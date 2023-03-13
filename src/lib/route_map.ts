@@ -1,5 +1,6 @@
 import { join, resolve } from "std/path/mod.ts";
 import { extract } from "std/encoding/front_matter/any.ts";
+import { readFileSync } from "../utils.ts";
 
 export interface RouteMap {
   title: string;
@@ -9,11 +10,12 @@ export interface RouteMap {
 }
 
 export function resolve_file(path: string) {
-  try {
-    return Deno.readTextFileSync(resolve(path + ".md"));
-  } catch {
-    return Deno.readTextFileSync(resolve(path, "index.md"));
-  }
+  return readFileSync(
+    resolve(path + ".md"),
+    // resolve(path + ".mdx"),
+    resolve(path, "index.md"),
+    // resolve(path, "index.mdx"),
+  );
 }
 
 export function get_route_map(directory: string, top_level = false) {
