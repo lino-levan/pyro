@@ -9,7 +9,8 @@ need to worry about (being `pyro.yml`).
 
 ## What goes into a `pyro.yml`?
 
-This is just a standard yaml configuration file. Inside you will define all properties related to pyro and plugins you may install.
+This is just a standard yaml configuration file. Inside you will define all
+properties related to pyro and plugins you may install.
 
 ```yaml
 # The title of the site

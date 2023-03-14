@@ -9,7 +9,7 @@ export async function generate(path: string) {
 
   Deno.writeTextFileSync(
     join(path, "pyro.yml"),
-    "title: Pyro Site\ngithub: https://github.com/lino-levan/pyro"
+    "title: Pyro Site\ngithub: https://github.com/lino-levan/pyro",
   );
 
   Deno.writeTextFileSync(
