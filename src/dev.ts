@@ -7,7 +7,7 @@ import { CSS } from "./lib/css.ts";
 import { parse } from "std/encoding/yaml.ts";
 import { Config } from "./lib/types.ts";
 
-export function dev(hostname = "0.0.0.0", port = 8000) {
+export async function dev(hostname = "0.0.0.0", port = 8000) {
   const config = parse(Deno.readTextFileSync("pyro.yml")) as Config;
   let BUILD_ID = Math.random().toString();
 
@@ -88,7 +88,7 @@ export function dev(hostname = "0.0.0.0", port = 8000) {
 
   const watcher = Deno.watchFs(".", { recursive: true });
 
-  for await (const event of watcher) {
+  for await (const _ of watcher) {
     BUILD_ID = Math.random().toString();
   }
 }
