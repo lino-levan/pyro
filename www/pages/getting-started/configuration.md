@@ -5,42 +5,33 @@ index: 1
 ---
 
 Pyro has a very simplistic view of configurations, there is only one file you
-need to worry about (being `deno.jsonc`).
+need to worry about (being `pyro.yml`).
 
-## What goes into a `deno.jsonc`?
+## What goes into a `pyro.yml`?
 
-This is just a regular deno configuration file so all of the regular fields can
-go into there. There is one additional namespace which contains all of the
-configuration specific to Pyro.
+This is just a standard yaml configuration file. Inside you will define all properties related to pyro and plugins you may install.
 
-```json
-{
-  // ...
-  "pyro": {
-    // The title of the site
-    "title": "Pyro",
+```yaml
+# The title of the site
+title: Pyro
 
-    // The Github repository for the documentation site (optional)
-    "github": "https://github.com/lino-levan/pyro",
+# The Github repository for the documentation site (optional)
+github: https://github.com/lino-levan/pyro
 
-    // Any copyright information you want to include in the footer (optional)
-    "copyright": "Copyright © 2023 Lino Le Van\nMIT Licensed.",
+# Any copyright information you want to include in the footer (optional)
+copyright: |-
+  Copyright © 2023 Lino Le Van
+  MIT Licensed
 
-    // Links in the footer (optional)
-    "footer": {
-      // Header of the column
-      "Learn": [
-        // [name, url]
-        ["Introduction", "/"],
-        ["Installation", "/getting-started/installation"]
-      ],
-      "Community": [
-        ["Discord", "https://discord.gg/XJMMSSC4Fj"],
-        ["Support", "https://github.com/lino-levan/pyro/issues/new"]
-      ]
-    }
-  }
-}
+# Links in the footer (optional)
+footer:
+  # Header of the column
+  Learn:
+    - Introduction /
+    - Installation /getting-started/installation
+  Community:
+   - Discord https://discord.gg/XJMMSSC4Fj
+   - Support https://github.com/lino-levan/pyro/issues/new
 ```
 
 ## How do I configure individual pages?

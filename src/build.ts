@@ -1,9 +1,11 @@
 import { walkSync } from "std/fs/walk.ts";
 import { join, resolve } from "std/path/mod.ts";
+import { parse } from "std/encoding/yaml.ts";
 import { render } from "./lib/render.ts";
 import { copySync } from "std/fs/copy.ts";
 import { getMagic } from "./lib/magic.ts";
 import { CSS } from "./lib/css.ts";
+import { Config } from "./lib/types.ts";
 
 export async function build() {
   try {
@@ -18,7 +20,7 @@ export async function build() {
 
   Deno.writeTextFileSync("./build/bundle.css", CSS);
 
-  const config = JSON.parse(Deno.readTextFileSync("deno.jsonc")).pyro;
+  const config = parse(Deno.readTextFileSync("pyro.yml")) as Config;
   const magic = getMagic();
 
   for (const entry of walkSync("./pages", { includeDirs: false })) {

@@ -44,7 +44,7 @@ my-pyro-site
 │   └── index.md
 ├── static
 │   └── icon.png
-└── deno.jsonc
+└── pyro.yml
 ```
 
 ### Project structure rundown
@@ -54,7 +54,7 @@ my-pyro-site
   [Configuration](/getting-started/configuration).
 - `/static/` - Contains any static assets that you may need (images, audio,
   etc.)
-- `deno.jsonc` - The only real configuration file for your site. Your site name
+- `pyro.yml` - The only real configuration file for your site. Your site name
   as well as any plugins will be defined here. Again there is more detail in
   [Configuration](/getting-started/configuration).
 

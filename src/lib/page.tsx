@@ -80,14 +80,14 @@ export async function page(props: {
                 <div>
                   <p class="font-bold pb-4">{name}</p>
                   <ul class="flex flex-col gap-2">
-                    {value.map(([name, url]) => (
+                    {value.map((value) => (
                       <li>
                         <a
                           class="flex items-center gap-1 hover:underline"
-                          href={url}
+                          href={value.split(" ").pop()}
                         >
-                          {name}
-                          {!url.startsWith("/") && (
+                          {value.split(" ").slice(0, -1).join(" ")}
+                          {!value.split(" ").pop()!.startsWith("/") && (
                             <ExternalLink class="inline w-4" />
                           )}
                         </a>

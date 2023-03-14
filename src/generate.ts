@@ -8,22 +8,8 @@ export async function generate(path: string) {
   Deno.mkdirSync(join(path, "static"), { recursive: true });
 
   Deno.writeTextFileSync(
-    join(path, "deno.jsonc"),
-    JSON.stringify(
-      {
-        tasks: {
-          build: "pyro build",
-          dev: "pyro dev",
-        },
-        imports: {},
-        pyro: {
-          title: "Pyro Site",
-          github: "https://github.com/lino-levan/pyro",
-        },
-      },
-      null,
-      2,
-    ),
+    join(path, "pyro.yml"),
+    "title: Pyro Site\ngithub: https://github.com/lino-levan/pyro"
   );
 
   Deno.writeTextFileSync(
