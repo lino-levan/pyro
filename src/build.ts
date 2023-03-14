@@ -18,7 +18,8 @@ export async function build() {
 
   copySync("./static", "./build");
 
-  Deno.writeTextFileSync("./build/bundle.css", CSS);
+  Deno.mkdirSync("./build/_pyro");
+  Deno.writeTextFileSync("./build/_pyro/bundle.css", CSS);
 
   const config = parse(Deno.readTextFileSync("pyro.yml")) as Config;
   const magic = getMagic();

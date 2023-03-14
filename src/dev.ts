@@ -7,18 +7,53 @@ import { CSS } from "./lib/css.ts";
 import { parse } from "std/encoding/yaml.ts";
 import { Config } from "./lib/types.ts";
 
-export function dev() {
+export async function dev() {
   const config = parse(Deno.readTextFileSync("pyro.yml")) as Config;
+  let BUILD_ID = Math.random().toString();
 
   serve(async (req) => {
     const url = new URL(req.url);
     const pathname = url.pathname.slice(1);
 
     // Handle the bundled css
-    if (pathname === "bundle.css") {
+    if (pathname === "_pyro/bundle.css") {
       return new Response(CSS, {
         headers: {
           "Content-Type": "text/css",
+        },
+      });
+    }
+
+    // Handle the reload js
+    if (pathname === "_pyro/reload.js") {
+      return new Response(
+        `new EventSource("/_pyro/reload").addEventListener("message", function listener(e) { if (e.data !== "${BUILD_ID}") { this.removeEventListener('message', listener); location.reload(); } });`,
+        {
+          headers: {
+            "Content-Type": "text/css",
+          },
+        },
+      );
+    }
+
+    if (pathname === "_pyro/reload") {
+      let timerId: number | undefined = undefined;
+      const body = new ReadableStream({
+        start(controller) {
+          controller.enqueue(`data: ${BUILD_ID}\nretry: 100\n\n`);
+          timerId = setInterval(() => {
+            controller.enqueue(`data: ${BUILD_ID}\n\n`);
+          }, 1000);
+        },
+        cancel() {
+          if (timerId !== undefined) {
+            clearInterval(timerId);
+          }
+        },
+      });
+      return new Response(body.pipeThrough(new TextEncoderStream()), {
+        headers: {
+          "content-type": "text/event-stream",
         },
       });
     }
@@ -39,7 +74,7 @@ export function dev() {
     }
 
     return new Response(
-      await render(config, getMagic(), resolve("pages", pathname)),
+      await render(config, getMagic(), resolve("pages", pathname), true),
       {
         headers: {
           "Content-Type": "text/html; charset=utf-8",
@@ -47,4 +82,10 @@ export function dev() {
       },
     );
   });
+
+  const watcher = Deno.watchFs(".", { recursive: true });
+
+  for await (const event of watcher) {
+    BUILD_ID = Math.random().toString();
+  }
 }

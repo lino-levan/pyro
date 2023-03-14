@@ -1,7 +1,6 @@
 {
   "tasks": {
-    "install": "deno install -Af --reload --config ./deno.jsonc -n pyro ./cli.ts",
-    "dev": "deno run -A --reload ./src/dev/dev.ts"
+    "install": "deno install -Af --reload --config ./deno.jsonc -n pyro ./cli.ts"
   },
   "imports": {
     "preact": "https://esm.sh/preact@10.11.0",
