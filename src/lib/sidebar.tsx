@@ -19,13 +19,13 @@ export function Sidebar(
                 open={true}
               >
                 <summary
-                  class={`flex justify-between items-center rounded pl-4 py-1 hover:bg-gray-100 transition-all ${
+                  class={`flex justify-between items-center rounded pl-4 py-1 hover:bg-gray-100 dark:hover:bg-gray-900 transition-all ${
                     props.route === route.url ? "bg-gray-100" : ""
                   }`}
                 >
                   <a
                     href={route.url}
-                    class="font-medium text-gray-700"
+                    class="font-medium text-gray-700 dark:text-gray-200"
                   >
                     {route.title}
                   </a>
@@ -45,7 +45,7 @@ export function Sidebar(
             : (
               <a
                 href={route.url}
-                class={`flex justify-between items-center rounded px-4 py-1 hover:bg-gray-100 transition-all ${
+                class={`flex justify-between items-center rounded px-4 py-1 hover:bg-gray-100 dark:hover:bg-gray-900 transition-all ${
                   props.route === route.url ? "bg-gray-100" : ""
                 }`}
               >
