@@ -20,7 +20,9 @@ export function Sidebar(
               >
                 <summary
                   class={`flex justify-between items-center rounded pl-4 py-1 hover:bg-gray-100 dark:hover:bg-gray-900 transition-all ${
-                    props.route === route.url ? "bg-gray-100" : ""
+                    props.route === route.url
+                      ? "bg-gray-100 dark:hover:bg-gray-900"
+                      : ""
                   }`}
                 >
                   <a
@@ -46,7 +48,9 @@ export function Sidebar(
               <a
                 href={route.url}
                 class={`flex justify-between items-center rounded px-4 py-1 hover:bg-gray-100 dark:hover:bg-gray-900 transition-all ${
-                  props.route === route.url ? "bg-gray-100" : ""
+                  props.route === route.url
+                    ? "bg-gray-100 dark:hover:bg-gray-900"
+                    : ""
                 }`}
               >
                 {route.title}
