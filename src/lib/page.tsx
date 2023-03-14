@@ -29,11 +29,11 @@ export async function page(props: {
         {props.options.dev && <script src="/_pyro/reload.js" />}
       </head>
       <body
-        class="flex flex-col min-h-screen"
+        class="flex flex-col min-h-screen dark:text-gray-200"
         style={{ backgroundColor: props.options.magic.background }}
       >
-        <header class="w-full h-16 shadow-sm flex items-center px-4 justify-between bg-white z-10">
-          <h1 class="font-semibold text-lg text-gray-800 flex items-center gap-2">
+        <header class="w-full h-16 shadow-sm flex items-center px-4 justify-between bg-white dark:bg-black z-10">
+          <h1 class="font-semibold text-lg text-gray-800 flex items-center gap-2 dark:text-gray-200">
             <image src="/icon.png" class="w-8 h-8" />
             {props.options.config.title}
           </h1>
@@ -45,14 +45,14 @@ export async function page(props: {
             )}
           </div>
         </header>
-        <div class="flex gap-4 flex-grow bg-white">
+        <div class="flex gap-12 flex-grow bg-white dark:bg-black">
           <Sidebar
-            class="w-64 p-2 border-r border-gray-200 pt-4 flex flex-col gap-2"
+            class="w-64 p-2 border-r border-gray-200 dark:border-gray-700 pt-4 flex flex-col gap-2"
             route_map={props.options.route_map}
             route={props.options.route}
           />
           <div class="flex-grow max-w-screen-lg flex flex-col gap-8 py-4 overflow-hidden">
-            <h1 class="text-5xl font-bold text-gray-800">
+            <h1 class="text-5xl font-bold text-gray-800 dark:text-gray-100">
               {props.page.title}
             </h1>
             {props.options.file_type === "md"
@@ -72,7 +72,7 @@ export async function page(props: {
           </div>
         </div>
         {props.options.config.footer && (
-          <footer class="px-4 py-12 w-full flex justify-center text-gray-800 border-t bg-white">
+          <footer class="px-4 py-12 w-full flex justify-center text-gray-800 dark:text-gray-200 border-t dark:border-gray-700 bg-white dark:bg-black">
             <div class="max-w-screen-lg w-full flex flex-wrap justify-around">
               <image src="/icon.png" class="w-8 h-8" />
               {Object.entries(props.options.config.footer).map((
@@ -99,7 +99,7 @@ export async function page(props: {
               ))}
               <div class="h-full flex flex-col justify-around">
                 {props.options.config.copyright && (
-                  <p class="whitespace-pre text-gray-500 text-sm">
+                  <p class="whitespace-pre text-gray-500 dark:text-gray-400 text-sm">
                     {props.options.config.copyright}
                   </p>
                 )}

@@ -18,14 +18,10 @@ export function Sidebar(
                 class={`group/${simplify(route.url)} select-none`}
                 open={true}
               >
-                <summary
-                  class={`flex justify-between items-center rounded pl-4 py-1 hover:bg-gray-100 transition-all ${
-                    props.route === route.url ? "bg-gray-100" : ""
-                  }`}
-                >
+                <summary class="flex justify-between items-center rounded pl-4 py-1 hover:bg-gray-100 dark:hover:bg-gray-900 transition-all">
                   <a
                     href={route.url}
-                    class="font-medium text-gray-700"
+                    class="font-medium text-gray-700 dark:text-gray-200"
                   >
                     {route.title}
                   </a>
@@ -45,9 +41,7 @@ export function Sidebar(
             : (
               <a
                 href={route.url}
-                class={`flex justify-between items-center rounded px-4 py-1 hover:bg-gray-100 transition-all ${
-                  props.route === route.url ? "bg-gray-100" : ""
-                }`}
+                class="flex justify-between items-center rounded px-4 py-1 hover:bg-gray-100 dark:hover:bg-gray-900 transition-all"
               >
                 {route.title}
                 {route.sub_route_map && <ChevronDown />}
