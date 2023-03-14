@@ -23,7 +23,6 @@ export async function page(props: {
       <head>
         <title>{props.page.title} | {props.options.config.title}</title>
         <link rel="stylesheet" href="/bundle.css" />
-        <script src="https://cdn.twind.style" />
         <meta name="description" content={props.page.description} />
         <link rel="icon" type="image/png" href="/icon.png" />
       </head>

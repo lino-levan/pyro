@@ -5,6 +5,19 @@ import { page } from "./page.tsx";
 import { get_route_map, resolve_file } from "./route_map.ts";
 import type { Config, Magic } from "./types.ts";
 
+import {
+  consume,
+  defineConfig,
+  install,
+  stringify,
+  tw,
+} from "https://esm.sh/@twind/core@1.1.3";
+import presetTailwind from "https://esm.sh/@twind/preset-tailwind@1.1.4";
+
+install(defineConfig({
+  presets: [presetTailwind()],
+}));
+
 export async function render(config: Config, magic: Magic, path: string) {
   const [file_type, markdown] = resolve_file(resolve("pages", path));
   const frontmatter = extract(markdown);
@@ -14,7 +27,7 @@ export async function render(config: Config, magic: Magic, path: string) {
   const description = frontmatter.attrs.description as string ??
     "No Description";
 
-  return "<!DOCTYPE html>\n" + renderToString(
+  const html = "<!DOCTYPE html>\n" + renderToString(
     await page({
       page: { title, description },
       options: {
@@ -27,4 +40,12 @@ export async function render(config: Config, magic: Magic, path: string) {
       },
     }),
   );
+
+  // Apply twind
+  const restore = tw.snapshot();
+  const markup = consume(html);
+  const css = stringify(tw.target);
+  restore();
+
+  return markup.replace("</head>", `<style data-twind>${css}</style></head>`);
 }
