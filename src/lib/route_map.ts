@@ -1,4 +1,4 @@
-import { join, resolve } from "std/path/mod.ts";
+import { join, posix, resolve, win32 } from "std/path/mod.ts";
 import { extract } from "std/encoding/front_matter/any.ts";
 import { readFileSync } from "../utils.ts";
 import type { RouteMap } from "./types.ts";
@@ -20,9 +20,11 @@ export function get_route_map(directory: string, top_level = false) {
       join(directory, entry.name.split(".")[0]),
     );
     const frontmatter = extract(markdown);
-    const extracted = resolve(directory, entry.name).match(
-      /(?:.+?\/pages(.+)\.)|(?:.+?\/pages(.+))/,
-    )!;
+    const extracted = (Deno.build.os == "windows"
+      ? posix.fromFileUrl(win32.toFileUrl(posix.resolve(directory, entry.name)))
+      : resolve(directory, entry.name)).match(
+        /(?:.+?\/pages(.+)\.)|(?:.+?\/pages(.+))/,
+      )!;
     const url = extracted[1] || extracted[2];
 
     if (url.includes("index") && !top_level) {
