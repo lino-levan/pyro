@@ -16,3 +16,12 @@ deployed **anywhere**.
 ## Getting started
 
 See the docs at [pyro.deno.dev](https://pyro.deno.dev)
+
+## Maintainers
+
+- Lino Le Van ([@lino-levan](https://github.com/lino-levan))
+- Dean Srebnik ([@load1n9](https://github.com/load1n9))
+
+## License
+
+MIT

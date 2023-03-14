@@ -16,15 +16,17 @@ export async function page(props: {
     config: Config;
     magic: Magic;
     file_type: FileTypes;
+    dev: boolean;
   };
 }) {
   return (
     <html lang="en">
       <head>
         <title>{props.page.title} | {props.options.config.title}</title>
-        <link rel="stylesheet" href="/bundle.css" />
+        <link rel="stylesheet" href="/_pyro/bundle.css" />
         <meta name="description" content={props.page.description} />
         <link rel="icon" type="image/png" href="/icon.png" />
+        {props.options.dev && <script src="/_pyro/reload.js" />}
       </head>
       <body
         class="flex flex-col min-h-screen"

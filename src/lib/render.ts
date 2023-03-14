@@ -18,7 +18,12 @@ install(defineConfig({
   presets: [presetTailwind()],
 }));
 
-export async function render(config: Config, magic: Magic, path: string) {
+export async function render(
+  config: Config,
+  magic: Magic,
+  path: string,
+  dev = false,
+) {
   const [file_type, markdown] = resolve_file(resolve("pages", path));
   const frontmatter = extract(markdown);
   const route_map = get_route_map(resolve("pages"), true);
@@ -37,6 +42,7 @@ export async function render(config: Config, magic: Magic, path: string) {
         config,
         magic,
         file_type,
+        dev,
       },
     }),
   );
