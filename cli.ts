@@ -6,7 +6,7 @@ import { build } from "./src/build.ts";
 
 await new Command()
   .name("pyro")
-  .version("0.2.1")
+  .version("0.3.0")
   .description("The documentation site generator for Deno")
   .command("gen", "Generate a Pyro site.")
   .arguments("<path:string>")
