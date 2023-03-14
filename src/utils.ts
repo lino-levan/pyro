@@ -4,6 +4,10 @@ import { compile } from "https://esm.sh/@mdx-js/mdx@2.2.1";
 import { render } from "gfm";
 import type { FileTypes } from "./lib/types.ts";
 
+import "https://esm.sh/prismjs@1.29.0/components/prism-json?no-check";
+import "https://esm.sh/prismjs@1.29.0/components/prism-bash?no-check";
+import "https://esm.sh/prismjs@1.29.0/components/prism-yaml?no-check";
+
 export function readFileSync(...options: string[]): [FileTypes, string] {
   if (options.length === 1) {
     return [

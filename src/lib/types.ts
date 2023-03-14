@@ -2,7 +2,7 @@ export interface Config {
   title: string;
   github?: string;
   copyright?: string;
-  footer?: Record<string, [string, string][]>;
+  footer?: Record<string, string[]>;
 }
 
 export interface Magic {

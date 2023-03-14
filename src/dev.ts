@@ -4,9 +4,11 @@ import { serveDir } from "std/http/file_server.ts";
 import { render } from "./lib/render.ts";
 import { getMagic } from "./lib/magic.ts";
 import { CSS } from "./lib/css.ts";
+import { parse } from "std/encoding/yaml.ts";
+import { Config } from "./lib/types.ts";
 
 export function dev() {
-  const config = JSON.parse(Deno.readTextFileSync("deno.jsonc")).pyro;
+  const config = parse(Deno.readTextFileSync("pyro.yml")) as Config;
 
   serve(async (req) => {
     const url = new URL(req.url);
