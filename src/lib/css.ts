@@ -52,27 +52,6 @@ details > summary::-webkit-details-marker {
   --color-danger-fg:#cf222e
 }
 
-/* Firefox */
-* {
-  scrollbar-width: auto;
-  scrollbar-color: #aeabd8 #dcdada;
-}
-
-/* Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
-  width: 14px;
-}
-
-*::-webkit-scrollbar-track {
-  background: #dcdada;
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: #aeabd8;
-  border-radius: 10px;
-  border: 0px none #050505;
-}
-
 @media (prefers-color-scheme:dark){
   /* Firefox */
   * {

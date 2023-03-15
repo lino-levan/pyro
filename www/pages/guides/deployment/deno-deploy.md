@@ -33,7 +33,7 @@ jobs:
           deno-version: v1.x
 
       - name: Install Pyro
-        run: deno install -Af --reload --config https://deno.land/x/pyro/deno.jsonc -n pyro https://deno.land/x/pyro/cli.ts
+        run: deno install -Af --reload --importmap https://deno.land/x/pyro/import_map.json -n pyro https://deno.land/x/pyro/cli.ts
 
       - name: Build the website
         working-directory: ./www
