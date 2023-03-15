@@ -15,7 +15,7 @@ Pyro(raptor) is essentially just a [Deno CLI tool](https://deno.land).
 If these requirements are met, you should be able to install the CLI:
 
 ```bash
-deno install -Af --reload --config https://deno.land/x/pyro/deno.jsonc -n pyro https://deno.land/x/pyro/cli.ts
+deno run -Ar https://deno.land/x/pyro/install.ts
 ```
 
 ## Scaffold your first site
