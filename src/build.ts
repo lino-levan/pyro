@@ -1,5 +1,5 @@
 import { walkSync } from "std/fs/walk.ts";
-import { join, resolve } from "std/path/mod.ts";
+import { join, posix, resolve, win32 } from "std/path/mod.ts";
 import { parse } from "std/encoding/yaml.ts";
 import { render } from "./lib/render.ts";
 import { copySync } from "std/fs/copy.ts";
@@ -25,9 +25,12 @@ export async function build() {
   const magic = getMagic();
 
   for (const entry of walkSync("./pages", { includeDirs: false })) {
-    const extracted = resolve(entry.path).match(
-      /.+?\/pages(.+)\./,
-    )!;
+    const extracted = (Deno.build.os == "windows"
+      ? posix.fromFileUrl(win32.toFileUrl(posix.resolve(entry.path)))
+      : resolve(entry.path)).match(
+        /.+?\/pages(.+)\./,
+      )!;
+
     const folder = extracted[1].slice(1).replace("index", "");
     Deno.mkdirSync(join("build", folder), { recursive: true });
     Deno.writeTextFileSync(
