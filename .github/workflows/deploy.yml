@@ -1,6 +1,10 @@
 name: Deploy
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   deploy:
@@ -20,7 +24,7 @@ jobs:
           deno-version: v1.x
 
       - name: Install Pyro
-        run: deno install -Af --reload --config ./deno.jsonc -n pyro ./cli.ts
+        run: deno install -Af --reload --importmap ./import_map.json -n pyro ./cli.ts
 
       - name: Build the website
         working-directory: ./www
