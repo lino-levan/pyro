@@ -20,7 +20,7 @@ jobs:
           deno-version: v1.x
 
       - name: Install Pyro
-        run: deno install -Af --reload --config ./deno.jsonc -n pyro ./cli.ts
+        run: deno task install
 
       - name: Build the website
         working-directory: ./www

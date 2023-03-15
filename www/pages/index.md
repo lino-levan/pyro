@@ -24,7 +24,7 @@ Understand Pyro in **5 minutes** by trying it out!
 First install Pyro
 
 ```bash
-deno install -Af --reload --config https://deno.land/x/pyro/deno.jsonc -n pyro https://deno.land/x/pyro/cli.ts
+deno run -Ar https://deno.land/x/pyro/install.ts
 ```
 
 Create the site
