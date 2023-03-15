@@ -51,7 +51,49 @@ details > summary::-webkit-details-marker {
   --color-accent-emphasis:#0969da;
   --color-danger-fg:#cf222e
 }
+
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #aeabd8 #dcdada;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 14px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #dcdada;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #aeabd8;
+  border-radius: 10px;
+  border: 0px none #050505;
+}
+
 @media (prefers-color-scheme:dark){
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #aeabd8 #000000;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 14px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #000000;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #aeabd8;
+    border-radius: 10px;
+    border: 0px none #050505;
+  }
   .markdown-body {
       --color-canvas-default-transparent:rgba(13,17,23,0);
       --color-prettylights-syntax-comment:#8b949e;
