@@ -1,14 +1,13 @@
 ---
-title: Deno Deploy
+title: Github Pages
 description: Pyro was designed from the ground up to be no-config and incredibly fast.
-index: 0
+index: 1
 ---
 
-Pyro provides an easy way to publish to Deno Deploy using Github Actions, which
+Pyro provides an easy way to publish to Github Pages using Github Actions, which
 comes for free with every GitHub repository.
 
-Place the following file in `.github/workflows/deploy.yml` and replace
-`DENO_DEPLOY_PROJECT` with the name of your project on Deno Deploy.
+Place the following file in `.github/workflows/deploy.yml`.
 
 ```yaml
 name: Deploy
@@ -24,11 +23,15 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      id-token: write # This is required to allow the GitHub Action to authenticate with Deno Deploy.
-      contents: read
+      id-token: write 
+      pages: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Clone repository
+      - name: Checkout
         uses: actions/checkout@v3
 
       - name: Download Deno
@@ -42,10 +45,15 @@ jobs:
       - name: Build the website
         run: pyro build
 
-      - name: Deploy to Deno Deploy
-        uses: denoland/deployctl@v1
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          project: DENO_DEPLOY_PROJECT
-          entrypoint: https://deno.land/std/http/file_server.ts
-          root: ./build
+          path: './build'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
 ```
