@@ -16,6 +16,8 @@ export function get_route_map(directory: string, top_level = false) {
   const route_map: RouteMap[] = [];
 
   for (const entry of Deno.readDirSync(directory)) {
+    if (entry.name.startsWith("_")) continue;
+
     const [_, markdown] = resolve_file(
       join(directory, entry.name.split(".")[0]),
     );
