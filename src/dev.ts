@@ -58,6 +58,13 @@ export async function dev(hostname = "0.0.0.0", port = 8000) {
       });
     }
 
+    // We're supposed to ignore hidden paths
+    if (pathname.includes("/_") || pathname.startsWith("_")) {
+      return new Response("404 File Not Found", {
+        status: 404,
+      });
+    }
+
     // We're supposed to serve a static file
     if (pathname.includes(".")) {
       try {

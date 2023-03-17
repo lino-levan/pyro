@@ -24,7 +24,9 @@ export async function build() {
   const config = parse(Deno.readTextFileSync("pyro.yml")) as Config;
   const magic = getMagic();
 
-  for (const entry of walkSync("./pages", { includeDirs: false })) {
+  for (
+    const entry of walkSync("./pages", { includeDirs: false, skip: [/\/_/] })
+  ) {
     const extracted = (Deno.build.os == "windows"
       ? posix.fromFileUrl(win32.toFileUrl(posix.resolve(entry.path)))
       : resolve(entry.path)).match(
