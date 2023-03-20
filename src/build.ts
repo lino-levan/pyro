@@ -4,7 +4,7 @@ import { parse } from "std/encoding/yaml.ts";
 import { render } from "./lib/render.ts";
 import { copySync } from "std/fs/copy.ts";
 import { getMagic } from "./lib/magic.ts";
-import { CSS } from "./lib/css.ts";
+import { getCSS } from "./lib/css.ts";
 import { Config } from "./lib/types.ts";
 
 export async function build() {
@@ -16,13 +16,13 @@ export async function build() {
     // no-op
   }
 
+  const config = parse(Deno.readTextFileSync("pyro.yml")) as Config;
   copySync("./static", "./build");
 
   Deno.mkdirSync("./build/_pyro");
-  Deno.writeTextFileSync("./build/_pyro/bundle.css", CSS);
+  Deno.writeTextFileSync("./build/_pyro/bundle.css", getCSS(config));
 
-  const config = parse(Deno.readTextFileSync("pyro.yml")) as Config;
-  const magic = getMagic();
+  const magic = getMagic(config);
 
   for (
     const entry of walkSync("./pages", { includeDirs: false, skip: [/\/_/] })

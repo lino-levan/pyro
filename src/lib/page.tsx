@@ -25,7 +25,7 @@ export async function page(props: {
         <title>{props.page.title} | {props.options.config.title}</title>
         <link rel="stylesheet" href="/_pyro/bundle.css" />
         <meta name="description" content={props.page.description} />
-        <link rel="icon" type="image/png" href="/icon.png" />
+        <link rel="icon" type="image/png" href={props.options.config.icon ?? "/icon.png"} />
         {props.options.dev && <script src="/_pyro/reload.js" />}
       </head>
       <body
@@ -74,7 +74,7 @@ export async function page(props: {
         {props.options.config.footer && (
           <footer class="px-4 py-12 w-full flex justify-center text-gray-800 dark:text-gray-200 border-t dark:border-gray-700 bg-white dark:bg-black">
             <div class="max-w-screen-lg w-full flex flex-wrap justify-around">
-              <image src="/icon.png" class="w-8 h-8" />
+              <image src={props.options.config.icon ?? "/icon.png"} class="w-8 h-8" />
               {Object.entries(props.options.config.footer).map((
                 [name, value],
               ) => (

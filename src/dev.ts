@@ -3,7 +3,7 @@ import { resolve } from "std/path/mod.ts";
 import { serveDir } from "std/http/file_server.ts";
 import { render } from "./lib/render.ts";
 import { getMagic } from "./lib/magic.ts";
-import { CSS } from "./lib/css.ts";
+import { getCSS } from "./lib/css.ts";
 import { parse } from "std/encoding/yaml.ts";
 import { Config } from "./lib/types.ts";
 
@@ -17,7 +17,7 @@ export async function dev(hostname = "0.0.0.0", port = 8000) {
 
     // Handle the bundled css
     if (pathname === "_pyro/bundle.css") {
-      return new Response(CSS, {
+      return new Response(getCSS(config), {
         headers: {
           "Content-Type": "text/css",
         },
@@ -81,7 +81,7 @@ export async function dev(hostname = "0.0.0.0", port = 8000) {
     }
 
     return new Response(
-      await render(config, getMagic(), resolve("pages", pathname), true),
+      await render(config, getMagic(config), resolve("pages", pathname), true),
       {
         headers: {
           "Content-Type": "text/html; charset=utf-8",

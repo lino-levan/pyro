@@ -1,5 +1,6 @@
 import { resolve } from "std/path/mod.ts";
 import { extract } from "std/encoding/front_matter/any.ts";
+import { parse } from "std/encoding/yaml.ts";
 import { renderToString } from "preact-render-to-string";
 import { page } from "./page.tsx";
 import { get_route_map, resolve_file } from "./route_map.ts";
@@ -14,8 +15,17 @@ import {
 } from "https://esm.sh/@twind/core@1.1.3";
 import presetTailwind from "https://esm.sh/@twind/preset-tailwind@1.1.4";
 
+const config = parse(Deno.readTextFileSync("pyro.yml")) as Config;
+const presets = presetTailwind();
+if (config.theme) {
+  presets.theme.colors = Object.assign(
+    {},
+    presets.theme.colors,
+    config.theme.colors,
+  );
+}
 install(defineConfig({
-  presets: [presetTailwind()],
+  presets: [presets],
 }));
 
 export async function render(

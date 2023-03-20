@@ -1,6 +1,8 @@
 import { KATEX_CSS } from "gfm";
+import { Config } from "./types.ts";
 
-export const CSS = (
+
+export const getCSS = (_config: Config) => (
   KATEX_CSS +
   `
 details > summary{

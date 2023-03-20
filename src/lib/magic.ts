@@ -2,7 +2,7 @@
 // For example, we select the background color from the logo
 // No config needed!
 import { decode } from "https://deno.land/x/pngs@0.1.1/mod.ts";
-import type { Magic } from "./types.ts";
+import type { Config, Magic } from "./types.ts";
 
 function saturation(r: number, g: number, b: number) {
   r = r / 255;
@@ -21,9 +21,9 @@ function saturation(r: number, g: number, b: number) {
   }
 }
 
-function getBackground() {
+function getBackground(config: Config) {
   try {
-    const logo = Deno.readFileSync("./static/icon.png");
+    const logo = Deno.readFileSync(`./static/${config.icon ?? "icon.png"}`);
     const bytes = decode(logo);
 
     let brightest_color = "rgb(0,0,0)";
@@ -50,8 +50,8 @@ function getBackground() {
   }
 }
 
-export function getMagic(): Magic {
+export function getMagic(config: Config): Magic {
   return {
-    background: getBackground(),
+    background: getBackground(config),
   };
 }
