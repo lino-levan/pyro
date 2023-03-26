@@ -6,6 +6,7 @@ import { getMagic } from "./lib/magic.ts";
 import { CSS } from "./lib/css.ts";
 import { parse } from "std/encoding/yaml.ts";
 import { Config } from "./lib/types.ts";
+import { loadPlugins } from "./utils.ts";
 
 export async function dev(hostname = "0.0.0.0", port = 8000) {
   const config = parse(Deno.readTextFileSync("pyro.yml")) as Config;
@@ -13,10 +14,20 @@ export async function dev(hostname = "0.0.0.0", port = 8000) {
 
   serve(async (req) => {
     const url = new URL(req.url);
-    const pathname = url.pathname.slice(1);
+    const pathname = url.pathname;
+
+    const plugins = config.plugins ? await loadPlugins(config.plugins) : [];
+
+    for (const plugin of plugins) {
+      if (!plugin.routes || !plugin.handle) continue;
+
+      if (plugin.routes.includes(pathname)) {
+        return plugin.handle(req);
+      }
+    }
 
     // Handle the bundled css
-    if (pathname === "_pyro/bundle.css") {
+    if (pathname === "/_pyro/bundle.css") {
       return new Response(CSS, {
         headers: {
           "Content-Type": "text/css",
@@ -25,7 +36,7 @@ export async function dev(hostname = "0.0.0.0", port = 8000) {
     }
 
     // Handle the reload js
-    if (pathname === "_pyro/reload.js") {
+    if (pathname === "/_pyro/reload.js") {
       return new Response(
         `new EventSource("/_pyro/reload").addEventListener("message", function listener(e) { if (e.data !== "${BUILD_ID}") { this.removeEventListener('message', listener); location.reload(); } });`,
         {
@@ -36,7 +47,7 @@ export async function dev(hostname = "0.0.0.0", port = 8000) {
       );
     }
 
-    if (pathname === "_pyro/reload") {
+    if (pathname === "/_pyro/reload") {
       let timerId: number | undefined = undefined;
       const body = new ReadableStream({
         start(controller) {
@@ -59,7 +70,7 @@ export async function dev(hostname = "0.0.0.0", port = 8000) {
     }
 
     // We're supposed to ignore hidden paths
-    if (pathname.includes("/_") || pathname.startsWith("_")) {
+    if (pathname.includes("/_")) {
       return new Response("404 File Not Found", {
         status: 404,
       });
@@ -81,7 +92,13 @@ export async function dev(hostname = "0.0.0.0", port = 8000) {
     }
 
     return new Response(
-      await render(config, getMagic(), resolve("pages", pathname), true),
+      await render(
+        config,
+        getMagic(),
+        resolve("pages", pathname.slice(1)),
+        plugins,
+        true,
+      ),
       {
         headers: {
           "Content-Type": "text/html; charset=utf-8",

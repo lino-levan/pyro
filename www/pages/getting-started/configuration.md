@@ -33,6 +33,10 @@ footer:
   Community:
    - Discord https://discord.gg/XJMMSSC4Fj
    - Support https://github.com/lino-levan/pyro/issues/new
+
+# Any plugins you want to be used (optional)
+plugin:
+  - https://deno.land/x/pyro/plugins/demo.tsx
 ```
 
 ## How do I configure individual pages?

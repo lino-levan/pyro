@@ -1,4 +1,4 @@
-import type { Config, FileTypes, Magic, RouteMap } from "./types.ts";
+import type { Config, FileTypes, JSX, Magic, RouteMap } from "./types.ts";
 import Github from "icons/brand-github.tsx";
 import ExternalLink from "icons/external-link.tsx";
 import { renderMD, renderMDX } from "../utils.ts";
@@ -17,6 +17,10 @@ export async function page(props: {
     magic: Magic;
     file_type: FileTypes;
     dev: boolean;
+    header: {
+      left: JSX.Element[];
+      right: JSX.Element[];
+    };
   };
 }) {
   return (
@@ -32,12 +36,14 @@ export async function page(props: {
         class="flex flex-col min-h-screen dark:text-gray-200"
         style={{ backgroundColor: props.options.magic.background }}
       >
-        <header class="w-full h-16 shadow-sm flex items-center px-4 justify-between bg-white dark:bg-black z-10">
-          <h1 class="font-semibold text-lg text-gray-800 flex items-center gap-2 dark:text-gray-200">
+        <header class="w-full h-16 shadow-sm flex gap-4 items-center px-4 bg-white dark:bg-black z-10">
+          <h1 class="font-semibold text-lg text-gray-800 flex items-center gap-2 dark:text-gray-200 mr-4">
             <image src="/icon.png" class="w-8 h-8" />
             {props.options.config.title}
           </h1>
-          <div class="flex items-center">
+          {props.options.header.left}
+          <div class="flex gap-4 items-center ml-auto">
+            {props.options.header.right}
             {props.options.config.github && (
               <a target="_blank" href={props.options.config.github}>
                 <Github />
