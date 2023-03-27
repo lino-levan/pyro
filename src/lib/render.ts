@@ -3,7 +3,7 @@ import { extract } from "std/encoding/front_matter/any.ts";
 import { renderToString } from "preact-render-to-string";
 import { page } from "./page.tsx";
 import { get_route_map, resolve_file } from "./route_map.ts";
-import type { Config, Magic } from "./types.ts";
+import type { Config, Magic, PluginResult } from "./types.ts";
 
 import {
   consume,
@@ -13,6 +13,7 @@ import {
   tw,
 } from "https://esm.sh/@twind/core@1.1.3";
 import presetTailwind from "https://esm.sh/@twind/preset-tailwind@1.1.4";
+import { getHeaderElements } from "../utils.ts";
 
 install(defineConfig({
   presets: [presetTailwind()],
@@ -22,6 +23,7 @@ export async function render(
   config: Config,
   magic: Magic,
   path: string,
+  plugins: PluginResult[],
   dev = false,
 ) {
   const [file_type, markdown] = resolve_file(resolve("pages", path));
@@ -43,6 +45,7 @@ export async function render(
         magic,
         file_type,
         dev,
+        header: getHeaderElements(plugins),
       },
     }),
   );
