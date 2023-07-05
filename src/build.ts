@@ -1,6 +1,6 @@
 import { walkSync } from "std/fs/walk.ts";
 import { posix, resolve, win32 } from "std/path/mod.ts";
-import { parse } from "std/encoding/yaml.ts";
+import { parse } from "std/yaml/mod.ts";
 import { render } from "./lib/render.ts";
 import { copySync } from "std/fs/copy.ts";
 import { getMagic } from "./lib/magic.ts";

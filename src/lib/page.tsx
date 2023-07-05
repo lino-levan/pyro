@@ -42,7 +42,7 @@ export async function page(props: {
             {props.options.config.title}
           </h1>
           {props.options.header.left}
-          <div class="flex gap-4 items-center ml-auto">
+          <div class="flex gap-4 items-center ml-auto text-gray-100">
             {props.options.header.right}
             {props.options.config.github && (
               <a target="_blank" href={props.options.config.github}>

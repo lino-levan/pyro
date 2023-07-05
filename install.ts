@@ -2,6 +2,7 @@
 // Deno has a bug where you can't --config from a remote
 // location which makes it impossible afaik to do this
 // another way. If you have a better idea, open a PR!
+// https://github.com/denoland/deno/issues/13488
 
 let config_file = "./384y89xnd.jsonc";
 const install_from = Deno.args[0] ?? "https://deno.land/x/pyro";

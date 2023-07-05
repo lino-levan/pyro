@@ -1,5 +1,5 @@
 import { resolve } from "std/path/mod.ts";
-import { extract } from "std/encoding/front_matter/any.ts";
+import { extract } from "std/front_matter/any.ts";
 import { renderToString } from "preact-render-to-string";
 import { page } from "./page.tsx";
 import { get_route_map, resolve_file } from "./route_map.ts";
@@ -11,8 +11,8 @@ import {
   install,
   stringify,
   tw,
-} from "https://esm.sh/@twind/core@1.1.3";
-import presetTailwind from "https://esm.sh/@twind/preset-tailwind@1.1.4";
+} from "https://esm.sh/@twind/core@1.2.0-next-20221226213230";
+import presetTailwind from "https://esm.sh/@twind/preset-tailwind@2.0.0-next-20221213150400";
 import { getHeaderElements } from "../utils.ts";
 
 install(defineConfig({
