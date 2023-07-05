@@ -1,5 +1,5 @@
-import { Command } from "https://deno.land/x/cliffy@v0.25.7/command/mod.ts";
-import * as path from "https://deno.land/std@0.179.0/path/mod.ts";
+import { Command } from "cliffy";
+import * as path from "std/path/mod.ts";
 import { generate } from "./src/generate.ts";
 import { dev } from "./src/dev.ts";
 import { build } from "./src/build.ts";

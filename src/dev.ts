@@ -4,7 +4,7 @@ import { serveDir } from "std/http/file_server.ts";
 import { render } from "./lib/render.ts";
 import { getMagic } from "./lib/magic.ts";
 import { CSS } from "./lib/css.ts";
-import { parse } from "std/encoding/yaml.ts";
+import { parse } from "std/yaml/mod.ts";
 import { Config } from "./lib/types.ts";
 import { loadPlugins } from "./utils.ts";
 
