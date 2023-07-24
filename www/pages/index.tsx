@@ -9,7 +9,7 @@ export const config = {
 
 export default function Page() {
   return (
-    <div class="flex flex-col items-center pb-16 dark:bg-black dark:text-white">
+    <div class="flex flex-col items-center pb-16 bg-white dark:bg-black dark:text-white">
       <header class="w-full h-16 shadow-sm flex gap-4 items-center px-4 bg-white dark:bg-black z-10">
         <a href="/">
           <h1 class="font-semibold text-lg text-gray-800 flex items-center gap-2 dark:text-gray-200 mr-4">
