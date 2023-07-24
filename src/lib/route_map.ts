@@ -7,8 +7,10 @@ export function resolve_file(path: string) {
   return readFileSync(
     resolve(path + ".md"),
     resolve(path + ".mdx"),
+    resolve(path + ".tsx"),
     resolve(path, "index.md"),
     resolve(path, "index.mdx"),
+    resolve(path, "index.tsx"),
   );
 }
 
@@ -18,9 +20,11 @@ export function get_route_map(directory: string, top_level = false) {
   for (const entry of Deno.readDirSync(directory)) {
     if (entry.name.startsWith("_")) continue;
 
-    const [_, markdown] = resolve_file(
+    const [file_type, markdown] = resolve_file(
       join(directory, entry.name.split(".")[0]),
     );
+    if(file_type === "tsx") continue;
+
     const frontmatter = extract(markdown);
     const extracted = (Deno.build.os == "windows"
       ? posix.fromFileUrl(win32.toFileUrl(posix.resolve(directory, entry.name)))

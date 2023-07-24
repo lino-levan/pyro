@@ -4,6 +4,10 @@ import { compile } from "mdx";
 import { render } from "gfm";
 import type { FileTypes, JSX, Plugin, PluginResult } from "./lib/types.ts";
 
+import "prism/components/prism-markdown?no-check";
+import "prism/components/prism-jsx?no-check";
+import "prism/components/prism-python?no-check";
+import "prism/components/prism-typescript?no-check";
 import "prism/components/prism-json?no-check";
 import "prism/components/prism-bash?no-check";
 import "prism/components/prism-yaml?no-check";
