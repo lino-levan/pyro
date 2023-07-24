@@ -23,7 +23,7 @@ export function get_route_map(directory: string, top_level = false) {
     const [file_type, markdown] = resolve_file(
       join(directory, entry.name.split(".")[0]),
     );
-    if(file_type === "tsx") continue;
+    if (file_type === "tsx") continue;
 
     const frontmatter = extract(markdown);
     const extracted = (Deno.build.os == "windows"

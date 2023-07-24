@@ -1,16 +1,10 @@
-import { resolve, fromFileUrl } from "std/path/mod.ts";
+import { fromFileUrl, resolve } from "std/path/mod.ts";
 import { extract } from "std/front_matter/any.ts";
 import { existsSync } from "std/fs/exists.ts";
 import { renderToString } from "preact-render-to-string";
 import * as esbuild from "esbuild";
 import { denoPlugins } from "esbuild_deno_loader";
-import {
-  consume,
-  defineConfig,
-  install,
-  stringify,
-  tw,
-} from "@twind/core";
+import { consume, defineConfig, install, stringify, tw } from "@twind/core";
 import presetTailwind from "@twind/preset-tailwind";
 
 import { page } from "./page.tsx";
@@ -42,35 +36,39 @@ export async function render(
   const base_path = resolve("pages", path);
   const [file_type, markdown] = resolve_file(base_path);
 
-  if(file_type === "tsx") {
+  if (file_type === "tsx") {
     const indexPath = base_path + "/index.tsx";
     const entrypoint = existsSync(indexPath) ? indexPath : base_path + ".tsx";
 
     const result = await esbuild.build({
       plugins: [...denoPlugins({
-        configPath: fromFileUrl(import.meta.resolve("../../deno.jsonc"))
+        configPath: fromFileUrl(import.meta.resolve("../../deno.jsonc")),
       })],
       entryPoints: [entrypoint],
       bundle: true,
       write: false,
       format: "esm",
       jsxImportSource: "preact",
-      jsx: "automatic"
+      jsx: "automatic",
     });
-    const file = new TextDecoder().decode(result.outputFiles[0].contents)
+    const file = new TextDecoder().decode(result.outputFiles[0].contents);
 
-    const { default: userPage, config } = await import("data:text/javascript;base64," + btoa(file));
+    const { default: userPage, config } = await import(
+      "data:text/javascript;base64," + btoa(file)
+    );
 
-    return applyTwind("<!DOCTYPE html>\n" + renderToString(
-      await page({
-        page: { title: config.title, description: config.description },
-        options: {
-          config,
-          dev,
-          body: renderToString(await userPage())
-        },
-      }),
-    ));
+    return applyTwind(
+      "<!DOCTYPE html>\n" + renderToString(
+        await page({
+          page: { title: config.title, description: config.description },
+          options: {
+            config,
+            dev,
+            body: renderToString(await userPage()),
+          },
+        }),
+      ),
+    );
   }
 
   const frontmatter = extract(markdown);

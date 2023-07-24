@@ -3,8 +3,9 @@ import Github from "https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/brand-github.
 
 export const config = {
   title: "Home",
-  description: "Pyro was designed from the ground up to be no-config and incredibly fast."
-}
+  description:
+    "Pyro was designed from the ground up to be no-config and incredibly fast.",
+};
 
 export default function Page() {
   return (
@@ -18,7 +19,11 @@ export default function Page() {
         </a>
         <a href="/getting-started">Docs</a>
         <div class="flex gap-4 items-center ml-auto text-gray-100">
-          <a target="_blank" class="text-black dark:text-white" href=" https://github.com/lino-levan/pyro">
+          <a
+            target="_blank"
+            class="text-black dark:text-white"
+            href=" https://github.com/lino-levan/pyro"
+          >
             <Github />
           </a>
         </div>
