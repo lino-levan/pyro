@@ -25,6 +25,7 @@ export async function page(props: {
     config: Config;
     body: string;
     dev: boolean;
+    magic: Magic;
   };
 }) {
   return (
@@ -37,7 +38,12 @@ export async function page(props: {
         {props.options.dev && <script src="/_pyro/reload.js" />}
       </head>
       {"body" in props.options
-        ? <body dangerouslySetInnerHTML={{ __html: props.options.body }} />
+        ? (
+          <body
+            style={{ backgroundColor: props.options.magic.background }}
+            dangerouslySetInnerHTML={{ __html: props.options.body }}
+          />
+        )
         : (
           <body
             class="flex flex-col min-h-screen dark:text-gray-200"

@@ -64,6 +64,7 @@ export async function render(
           options: {
             config,
             dev,
+            magic,
             body: renderToString(await userPage()),
           },
         }),
