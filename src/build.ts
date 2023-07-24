@@ -1,6 +1,7 @@
 import { walkSync } from "std/fs/walk.ts";
 import { posix, resolve, win32 } from "std/path/mod.ts";
 import { parse } from "std/yaml/mod.ts";
+import * as esbuild from 'esbuild'
 import { render } from "./lib/render.ts";
 import { copySync } from "std/fs/copy.ts";
 import { getMagic } from "./lib/magic.ts";
@@ -30,6 +31,7 @@ export async function build() {
     if (!plugin.routes || !plugin.handle) continue;
 
     for (const route of plugin.routes) {
+      console.log(`Created plugin route: ${route}`)
       const response = new Uint8Array(
         await (await plugin.handle(
           new Request("http://localhost:8000" + route),
@@ -49,6 +51,8 @@ export async function build() {
   for (
     const entry of walkSync("./pages", { includeDirs: false, skip: [/\/_/] })
   ) {
+    console.log(`Rendered route: ${entry.path}`)
+
     const extracted = (Deno.build.os == "windows"
       ? posix.fromFileUrl(win32.toFileUrl(posix.resolve(entry.path)))
       : resolve(entry.path)).match(
@@ -62,4 +66,6 @@ export async function build() {
       await render(config, magic, folder, plugins),
     );
   }
+
+  esbuild.stop()
 }
