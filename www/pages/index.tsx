@@ -30,13 +30,13 @@ export default function Page() {
       </header>
       <div class="flex justify-center items-center py-32 max-w-screen-xl">
         <div class="flex flex-col gap-8 items-center px-8 max-w-screen-md">
-          <h1 class="text-6xl font-bold">
+          <h1 class="text-4xl sm:text-6xl font-bold text-center sm:text-left">
             The{" "}
             <span class="text-red-500">SSG documentation site framework</span>
             {" "}
             you've been waiting for.
           </h1>
-          <div class="w-full flex flex-col gap-1">
+          <div class="w-full hidden sm:flex flex-col gap-1">
             <p class="text-gray-600 dark:text-gray-400">
               Run the following to{" "}
               <a
@@ -57,13 +57,13 @@ export default function Page() {
             </code>
           </div>
         </div>
-        <div class="grow flex items-center justify-center px-8">
+        <div class="grow hidden md:flex items-center justify-center px-8">
           <img class="w-full" src="/pyro_bg.png" />
         </div>
       </div>
       <div class="px-8 flex flex-col gap-4 max-w-screen-lg">
         <h1 class="text-4xl font-semibold">Rundown</h1>
-        <ul class="grid grid-cols-2 w-full text-xl gap-8">
+        <ul class="grid md:grid-cols-2 w-full text-xl gap-8">
           <li class="bg-gray-100 dark:bg-gray-900 rounded p-4 flex items-center gap-4">
             <span class="text-4xl">⚡️</span>{" "}
             <span>
