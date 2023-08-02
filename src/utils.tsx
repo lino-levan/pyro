@@ -2,7 +2,7 @@ import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-prism";
 import { compile } from "mdx";
 import { render } from "gfm";
-import type { FileTypes, JSX, Plugin, PluginResult } from "./lib/types.ts";
+import type { Config, FileTypes, JSX, Plugin, PluginResult } from "./lib/types.ts";
 
 import "prism/components/prism-markdown?no-check";
 import "prism/components/prism-jsx?no-check";
@@ -60,10 +60,17 @@ export function loadPlugins(plugins: string[]) {
   );
 }
 
-export function getHeaderElements(plugins: PluginResult[]) {
-  const header = {
-    left: [] as JSX.Element[],
-    right: [] as JSX.Element[],
+export function getHeaderElements(config: Config, plugins: PluginResult[]) {
+  const header: {
+    left: JSX.Element[],
+    right: JSX.Element[]
+  } = {
+    left: config.header?.left?.map((value)=>(
+      <a class="hover:text-gray-500 dark:hover:text-gray-400" href={value.split(" ").pop()}>{value.split(" ").slice(0, -1).join(" ")}</a>
+    )) ?? [],
+    right: config.header?.right?.map((value)=>(
+      <a class="hover:text-gray-500 dark:hover:text-gray-400" href={value.split(" ").pop()}>{value.split(" ").slice(0, -1).join(" ")}</a>
+    )) ?? [],
   };
 
   for (const plugin of plugins) {

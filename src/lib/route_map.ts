@@ -1,6 +1,6 @@
 import { join, posix, resolve, win32 } from "std/path/mod.ts";
 import { extract } from "std/front_matter/any.ts";
-import { readFileSync } from "../utils.ts";
+import { readFileSync } from "../utils.tsx";
 import type { RouteMap } from "./types.ts";
 
 export function resolve_file(path: string) {

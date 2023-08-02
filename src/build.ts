@@ -7,7 +7,7 @@ import { copySync } from "std/fs/copy.ts";
 import { getMagic } from "./lib/magic.ts";
 import { CSS } from "./lib/css.ts";
 import { Config } from "./lib/types.ts";
-import { loadPlugins } from "./utils.ts";
+import { loadPlugins } from "./utils.tsx";
 
 export async function build() {
   try {

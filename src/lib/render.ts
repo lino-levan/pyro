@@ -7,10 +7,10 @@ import { denoPlugins } from "esbuild_deno_loader";
 import { consume, defineConfig, install, stringify, tw } from "@twind/core";
 import presetTailwind from "@twind/preset-tailwind";
 
-import { page } from "./page.tsx";
+import { Footer, Header, page } from "./page.tsx";
 import { get_route_map, resolve_file } from "./route_map.ts";
 import type { Config, Magic, PluginResult } from "./types.ts";
-import { getHeaderElements } from "../utils.ts";
+import { getHeaderElements } from "../utils.tsx";
 
 install(defineConfig({
   presets: [presetTailwind()],
@@ -53,19 +53,22 @@ export async function render(
     });
     const file = new TextDecoder().decode(result.outputFiles[0].contents);
 
-    const { default: userPage, config } = await import(
+    const { default: userPage, config: userConfig } = await import(
       "data:text/javascript;base64," + btoa(file)
     );
 
     return applyTwind(
       "<!DOCTYPE html>\n" + renderToString(
         await page({
-          page: { title: config.title, description: config.description },
+          page: { title: config.title, description: userConfig.description },
           options: {
             config,
             dev,
             magic,
-            body: renderToString(await userPage()),
+            body: renderToString(await userPage({
+              header: Header({title: config.title, header: getHeaderElements(config, plugins), github: config.github}),
+              footer: config.footer ? Footer({copyright: config.copyright, github: config.github, footer: config.footer}) : undefined
+            })),
           },
         }),
       ),
@@ -90,7 +93,7 @@ export async function render(
         magic,
         file_type,
         dev,
-        header: getHeaderElements(plugins),
+        header: getHeaderElements(config, plugins),
       },
     }),
   );

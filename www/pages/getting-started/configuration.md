@@ -24,6 +24,16 @@ copyright: |-
   Copyright © 2023 Lino Le Van
   MIT Licensed
 
+# Links in the header (optional)
+header:
+  # links on the left side
+  left:
+    Docs /getting-started/installation
+
+  # links on the right side
+  right:
+    Bonus Content https://stackoverflow.com
+
 # Links in the footer (optional)
 footer:
   # Header of the column

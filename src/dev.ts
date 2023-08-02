@@ -6,7 +6,7 @@ import { getMagic } from "./lib/magic.ts";
 import { CSS } from "./lib/css.ts";
 import { parse } from "std/yaml/mod.ts";
 import { Config } from "./lib/types.ts";
-import { loadPlugins } from "./utils.ts";
+import { loadPlugins } from "./utils.tsx";
 
 export async function dev(hostname = "0.0.0.0", port = 8000) {
   const config = parse(Deno.readTextFileSync("pyro.yml")) as Config;

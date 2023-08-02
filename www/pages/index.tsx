@@ -1,5 +1,5 @@
 import IconArrowRight from "https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/arrow-right.tsx";
-import Github from "https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/brand-github.tsx";
+import { type PageProps } from "../../page.ts";
 
 export const config = {
   title: "Home",
@@ -7,27 +7,10 @@ export const config = {
     "Pyro was designed from the ground up to be no-config and incredibly fast.",
 };
 
-export default function Page() {
+export default function Page(props: PageProps) {
   return (
     <div class="flex flex-col items-center pb-16 bg-white dark:bg-black dark:text-white">
-      <header class="w-full h-16 shadow-sm flex gap-4 items-center px-4 bg-white dark:bg-black z-10">
-        <a href="/">
-          <h1 class="font-semibold text-lg text-gray-800 flex items-center gap-2 dark:text-gray-200 mr-4">
-            <image src="/icon.png" class="w-8 h-8" />
-            Pyro
-          </h1>
-        </a>
-        <a href="/getting-started">Docs</a>
-        <div class="flex gap-4 items-center ml-auto text-gray-100">
-          <a
-            target="_blank"
-            class="text-black dark:text-white"
-            href=" https://github.com/lino-levan/pyro"
-          >
-            <Github />
-          </a>
-        </div>
-      </header>
+      {props.header}
       <div class="flex justify-center items-center py-32 max-w-screen-xl">
         <div class="flex flex-col gap-8 items-center px-8 max-w-screen-md">
           <h1 class="text-4xl sm:text-6xl font-bold text-center sm:text-left">
@@ -61,7 +44,7 @@ export default function Page() {
           <img class="w-full" src="/pyro_bg.png" />
         </div>
       </div>
-      <div class="px-8 flex flex-col gap-4 max-w-screen-lg">
+      <div class="px-8 pb-8 flex flex-col gap-4 max-w-screen-lg">
         <h1 class="text-4xl font-semibold">Rundown</h1>
         <ul class="grid md:grid-cols-2 w-full text-xl gap-8">
           <li class="bg-gray-100 dark:bg-gray-900 rounded p-4 flex items-center gap-4">
@@ -152,6 +135,7 @@ export default function Page() {
           </li>
         </ul>
       </div>
+      {props.footer}
     </div>
   );
 }

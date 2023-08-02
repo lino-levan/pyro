@@ -3,6 +3,9 @@ github: https://github.com/lino-levan/pyro
 copyright: |-
   Copyright © 2023 Lino Le Van
   MIT Licensed
+header:
+  left:
+    - Docs /getting-started/installation
 footer:
   Learn:
     - Introduction /
