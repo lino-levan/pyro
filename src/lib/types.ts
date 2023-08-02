@@ -7,7 +7,7 @@ export interface Config {
   title: string;
   github?: string;
   copyright?: string;
-  header?: { left?: string[], right?: string[] }
+  header?: { left?: string[]; right?: string[] };
   footer?: Record<string, string[]>;
   plugins?: string[];
 }

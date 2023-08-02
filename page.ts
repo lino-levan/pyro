@@ -1,6 +1,6 @@
-import { JSX } from "./src/lib/types.ts"
+import { JSX } from "./src/lib/types.ts";
 
 export type PageProps = {
-  header: JSX.Element,
-  footer?: JSX.Element
-}
+  header: JSX.Element;
+  footer?: JSX.Element;
+};

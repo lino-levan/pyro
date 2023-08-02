@@ -65,10 +65,22 @@ export async function render(
             config,
             dev,
             magic,
-            body: renderToString(await userPage({
-              header: Header({title: config.title, header: getHeaderElements(config, plugins), github: config.github}),
-              footer: config.footer ? Footer({copyright: config.copyright, github: config.github, footer: config.footer}) : undefined
-            })),
+            body: renderToString(
+              await userPage({
+                header: Header({
+                  title: config.title,
+                  header: getHeaderElements(config, plugins),
+                  github: config.github,
+                }),
+                footer: config.footer
+                  ? Footer({
+                    copyright: config.copyright,
+                    github: config.github,
+                    footer: config.footer,
+                  })
+                  : undefined,
+              }),
+            ),
           },
         }),
       ),
