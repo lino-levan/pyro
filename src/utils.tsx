@@ -6,6 +6,7 @@ import type { Config, FileTypes, JSX, Plugin, PluginResult } from "./lib/types.t
 
 import "prism/components/prism-markdown?no-check";
 import "prism/components/prism-jsx?no-check";
+import "prism/components/prism-tsx?no-check";
 import "prism/components/prism-python?no-check";
 import "prism/components/prism-typescript?no-check";
 import "prism/components/prism-json?no-check";
