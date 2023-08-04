@@ -19,6 +19,9 @@ import "prism/components/prism-json?no-check";
 import "prism/components/prism-bash?no-check";
 import "prism/components/prism-yaml?no-check";
 
+/**
+ * Read a file and return the file type and the file content
+ */
 export function readFileSync(...options: string[]): [FileTypes, string] {
   if (options.length === 1) {
     return [
@@ -41,6 +44,9 @@ function removeFrontmatter(markdown: string) {
   return markdown.replace(/^---.+?---/s, "");
 }
 
+/**
+ * Render MDX to HTML
+ */
 export async function renderMDX(data: string) {
   const compiled = (await compile(removeFrontmatter(data), {
     jsxImportSource: "preact",
@@ -54,6 +60,9 @@ export async function renderMDX(data: string) {
   return mdx.default();
 }
 
+/**
+ * Render Markdown to HTML
+ */
 // deno-lint-ignore require-await
 export async function renderMD(data: string) {
   return render(removeFrontmatter(data), {
@@ -61,12 +70,18 @@ export async function renderMD(data: string) {
   });
 }
 
+/**
+ * Loads all the provided plugins
+ */
 export function loadPlugins(plugins: string[]) {
   return Promise.all(
     plugins.map(async (plugin) => ((await import(plugin)).default as Plugin)()),
   );
 }
 
+/**
+ * Get the header elements from the config and plugins
+ */
 export function getHeaderElements(config: Config, plugins: PluginResult[]) {
   const header: {
     left: JSX.Element[];

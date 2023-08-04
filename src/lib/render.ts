@@ -4,26 +4,29 @@ import { existsSync } from "std/fs/exists.ts";
 import { renderToString } from "preact-render-to-string";
 import * as esbuild from "esbuild";
 import { denoPlugins } from "esbuild_deno_loader";
-import { consume, defineConfig, install, stringify, tw } from "@twind/core";
-import presetTailwind from "@twind/preset-tailwind";
 
 import { Footer, Header, page } from "./page.tsx";
 import { get_route_map, resolve_file } from "./route_map.ts";
 import type { Config, Magic, PluginResult } from "./types.ts";
 import { getHeaderElements } from "../utils.tsx";
 
-install(defineConfig({
-  presets: [presetTailwind()],
-}));
+import { createGenerator } from "@unocss/core";
+import { presetUno } from "@unocss/preset-uno";
 
-function applyTwind(html: string) {
-  // Apply twind
-  const restore = tw.snapshot();
-  const markup = consume(html);
-  const css = stringify(tw.target);
-  restore();
+const uno = createGenerator({
+  presets: [
+    presetUno(),
+  ],
+});
 
-  return markup.replace("</head>", `<style data-twind>${css}</style></head>`);
+async function applyUno(html: string) {
+  // Apply uno
+  const warn = console.warn;
+  console.warn = () => {};
+  const { css } = await uno.generate(html);
+  html = html.replace("</head>", `<style>${css}</style></head>`);
+  console.warn = warn;
+  return html;
 }
 
 export async function render(
@@ -57,7 +60,7 @@ export async function render(
       "data:text/javascript;base64," + btoa(file)
     );
 
-    return applyTwind(
+    return await applyUno(
       "<!DOCTYPE html>\n" + renderToString(
         await page({
           page: { title: config.title, description: userConfig.description },
@@ -110,5 +113,5 @@ export async function render(
     }),
   );
 
-  return applyTwind(html);
+  return await applyUno(html);
 }

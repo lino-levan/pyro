@@ -1,7 +1,10 @@
 import { KATEX_CSS } from "gfm";
 
+const RESET_CSS = await (await fetch("https://unpkg.com/@unocss/reset@0.53.5/tailwind.css")).text()
+
 export const CSS = (
   KATEX_CSS +
+  RESET_CSS +
   `
 details > summary{
   list-style: none;

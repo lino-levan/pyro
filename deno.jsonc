@@ -17,8 +17,8 @@
     "cliffy": "https://deno.land/x/cliffy@v1.0.0-rc.2/command/mod.ts",
     "esbuild": "https://deno.land/x/esbuild@v0.17.19/mod.js",
     "esbuild_deno_loader": "https://deno.land/x/esbuild_deno_loader@0.8.1/mod.ts",
-    "@twind/core": "https://esm.sh/@twind/core@1.2.0-next-20221226213230",
-    "@twind/preset-tailwind": "https://esm.sh/@twind/preset-tailwind@2.0.0-next-20221213150400"
+    "@unocss/core": "https://esm.sh/@unocss/core@0.53.5",
+    "@unocss/preset-uno": "https://esm.sh/@unocss/preset-uno@0.53.5"
   },
   "compilerOptions": {
     "jsx": "react-jsx",
