@@ -1,6 +1,8 @@
 import { KATEX_CSS } from "gfm";
 
-const RESET_CSS = await (await fetch("https://unpkg.com/@unocss/reset@0.53.5/tailwind.css")).text()
+const RESET_CSS =
+  await (await fetch("https://unpkg.com/@unocss/reset@0.54.1/tailwind.css"))
+    .text();
 
 export const CSS = (
   KATEX_CSS +
