@@ -43,9 +43,17 @@ export async function render(
     const indexPath = base_path + "/index.tsx";
     const entrypoint = existsSync(indexPath) ? indexPath : base_path + ".tsx";
 
+    let configPath = import.meta.resolve("../../deno.jsonc");
+
+    try {
+      configPath = fromFileUrl(import.meta.resolve("../../deno.jsonc"));
+    } catch {
+      // no-op
+    }
+
     const result = await esbuild.build({
       plugins: [...denoPlugins({
-        configPath: fromFileUrl(import.meta.resolve("../../deno.jsonc")),
+        configPath,
       })],
       entryPoints: [entrypoint],
       bundle: true,
