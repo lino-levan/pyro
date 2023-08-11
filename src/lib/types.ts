@@ -9,6 +9,7 @@ export interface Config {
   copyright?: string;
   header?: { left?: string[]; right?: string[] };
   footer?: Record<string, string[]>;
+  hide_navbar?: boolean;
   plugins?: string[];
 }
 

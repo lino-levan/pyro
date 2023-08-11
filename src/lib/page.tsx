@@ -149,12 +149,18 @@ export async function page(props: {
               header={props.options.header}
               github={props.options.config.github}
             />
-            <div class="flex gap-12 flex-grow bg-white dark:bg-black">
-              <Sidebar
-                class="w-64 p-2 border-r border-gray-200 dark:border-gray-700 pt-4 flex flex-col gap-2"
-                route_map={props.options.route_map}
-                route={props.options.route}
-              />
+            <div
+              class={`flex gap-12 flex-grow bg-white dark:bg-black ${
+                props.options.config.hide_navbar ? "justify-center" : ""
+              }`}
+            >
+              {!props.options.config.hide_navbar && (
+                <Sidebar
+                  class="w-64 p-2 border-r border-gray-200 dark:border-gray-700 pt-4 flex flex-col gap-2"
+                  route_map={props.options.route_map}
+                  route={props.options.route}
+                />
+              )}
               <div class="flex-grow max-w-screen-lg flex flex-col gap-8 py-4 overflow-hidden">
                 <h1 class="text-5xl font-bold text-gray-800 dark:text-gray-100">
                   {props.page.title}

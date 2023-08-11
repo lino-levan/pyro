@@ -44,6 +44,9 @@ footer:
    - Discord https://discord.gg/XJMMSSC4Fj
    - Support https://github.com/lino-levan/pyro/issues/new
 
+# Hide the navigation bar on the left from rendering (optional)
+hide_navbar: true
+
 # Any plugins you want to be used (optional)
 plugin:
   - https://deno.land/x/pyro/plugins/demo.tsx
