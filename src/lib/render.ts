@@ -1,6 +1,7 @@
 import { fromFileUrl, resolve } from "std/path/mod.ts";
 import { extract } from "std/front_matter/any.ts";
 import { existsSync } from "std/fs/exists.ts";
+import { join } from "std/path/join.ts";
 import { renderToString } from "preact-render-to-string";
 import * as esbuild from "esbuild";
 import { denoPlugins } from "esbuild_deno_loader";
@@ -42,7 +43,7 @@ export async function render(
   const [file_type, markdown] = resolve_file(base_path);
 
   if (file_type === "tsx") {
-    const indexPath = base_path + "/index.tsx";
+    const indexPath = join(base_path, "index.tsx");
     const entrypoint = existsSync(indexPath) ? indexPath : base_path + ".tsx";
 
     let configPath = import.meta.resolve("../../deno.jsonc");
