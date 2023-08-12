@@ -44,7 +44,7 @@ export default function Page(props: PageProps) {
           <img class="w-full" src="/pyro_bg.png" />
         </div>
       </div>
-      <div class="px-8 pb-8 flex flex-col gap-4 max-w-screen-lg">
+      <div class="mx-8 pb-8 flex flex-col gap-4 max-w-screen-lg">
         <h1 class="text-4xl font-semibold">Rundown</h1>
         <ul class="grid md:grid-cols-2 w-full text-xl gap-8">
           <li class="bg-gray-100 dark:bg-gray-900 rounded p-4 flex items-center gap-4">
