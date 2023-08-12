@@ -1,7 +1,6 @@
-import { fromFileUrl, resolve } from "std/path/mod.ts";
+import { fromFileUrl, join, resolve, toFileUrl } from "std/path/mod.ts";
 import { extract } from "std/front_matter/any.ts";
 import { existsSync } from "std/fs/exists.ts";
-import { join } from "std/path/join.ts";
 import { renderToString } from "preact-render-to-string";
 import * as esbuild from "esbuild";
 import { denoPlugins } from "esbuild_deno_loader";
@@ -48,17 +47,15 @@ export async function render(
 
     let configPath = import.meta.resolve("../../deno.jsonc");
 
-    try {
-      configPath = fromFileUrl(import.meta.resolve("../../deno.jsonc"));
-    } catch {
-      // no-op
+    if (configPath.startsWith("file:")) {
+      configPath = fromFileUrl(configPath);
     }
 
     const result = await esbuild.build({
       plugins: [...denoPlugins({
         configPath,
       })],
-      entryPoints: [entrypoint],
+      entryPoints: [toFileUrl(entrypoint).href],
       bundle: true,
       write: false,
       format: "esm",
