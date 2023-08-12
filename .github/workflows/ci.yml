@@ -28,6 +28,9 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         run: deno lint
       
-      # TODO: Testing
-      # - name: run tests
-      #   run: deno task test
+      - name: install pyro
+        run: deno task install
+
+      - name: Build the website
+        working-directory: ./www
+        run: pyro build
