@@ -123,6 +123,7 @@ export async function page(props: {
         <title>{props.page.title} | {props.options.config.title}</title>
         <link rel="stylesheet" href="/_pyro/bundle.css" />
         <meta name="description" content={props.page.description} />
+        <meta name="viewport" content="width=device-width" />
         {
           /* <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${props.page.title} | ${props.options.config.title}`} />
