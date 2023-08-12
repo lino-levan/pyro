@@ -15,7 +15,9 @@ import { presetUno } from "@unocss/preset-uno";
 
 const uno = createGenerator({
   presets: [
-    presetUno(),
+    presetUno({
+      dark: "media",
+    }),
   ],
 });
 
