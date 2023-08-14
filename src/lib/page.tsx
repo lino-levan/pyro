@@ -12,7 +12,7 @@ export function Header(props: {
   github?: string;
 }) {
   return (
-    <header class="w-full h-16 shadow-sm flex gap-4 items-center px-4 bg-white dark:bg-black z-10">
+    <header class="w-full h-16 shadow-sm flex gap-4 items-center px-4 bg-white dark:bg-black text-gray-800 dark:text-gray-200 z-10">
       <a href="/">
         <h1 class="font-semibold text-lg text-gray-800 flex items-center gap-2 dark:text-gray-200 mr-4">
           <image src="/icon.png" class="w-8 h-8" />
