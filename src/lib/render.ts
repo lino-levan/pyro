@@ -106,7 +106,9 @@ export async function render(
   const title = frontmatter.attrs.title as string ?? "No Title";
   const description = frontmatter.attrs.description as string ??
     "No Description";
-  const hide_navbar = !!frontmatter.attrs.hide_navbar;
+  const hide_navbar = frontmatter.attrs.hide_navbar
+    ? !!frontmatter.attrs.hide_navbar
+    : undefined;
 
   const html = "<!DOCTYPE html>\n" + renderToString(
     await page({
