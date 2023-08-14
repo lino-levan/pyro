@@ -106,10 +106,11 @@ export async function render(
   const title = frontmatter.attrs.title as string ?? "No Title";
   const description = frontmatter.attrs.description as string ??
     "No Description";
+  const hide_navbar = !!frontmatter.attrs.hide_navbar;
 
   const html = "<!DOCTYPE html>\n" + renderToString(
     await page({
-      page: { title, description },
+      page: { title, description, hide_navbar },
       options: {
         markdown,
         route_map,

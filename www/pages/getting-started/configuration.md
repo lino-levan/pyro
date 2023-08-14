@@ -63,10 +63,12 @@ Here is an example in YAML:
 ---
 title: Title of Page
 description: Metadata description of page
+hide_navbar: true
 index: 0
 ---
 ```
 
 - `title` - The title of the page which also shows up as a large header
 - `description` - The description of the page for SEO and embeds
+- `hide_navbar` - Hide the navbar from this page
 - `index` - Used in determining [sidebar order](/guides/docs/sidebar)
