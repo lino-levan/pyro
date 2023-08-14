@@ -1,10 +1,7 @@
-import { serve } from "std/http/server.ts";
-import { resolve } from "std/path/mod.ts";
-import { serveDir } from "std/http/file_server.ts";
+import { parse, resolve, serveDir } from "../deps.ts";
 import { render } from "./lib/render.ts";
 import { getMagic } from "./lib/magic.ts";
 import { CSS } from "./lib/css.ts";
-import { parse } from "std/yaml/mod.ts";
 import { Config } from "./lib/types.ts";
 import { loadPlugins } from "./utils.tsx";
 
@@ -12,7 +9,10 @@ export async function dev(hostname = "0.0.0.0", port = 8000) {
   const config = parse(Deno.readTextFileSync("pyro.yml")) as Config;
   let BUILD_ID = Math.random().toString();
 
-  serve(async (req) => {
+  Deno.serve({
+    hostname,
+    port,
+  }, async (req) => {
     const url = new URL(req.url);
     const pathname = url.pathname;
 
@@ -105,9 +105,6 @@ export async function dev(hostname = "0.0.0.0", port = 8000) {
         },
       },
     );
-  }, {
-    hostname,
-    port,
   });
 
   const watcher = Deno.watchFs(".", { recursive: true });

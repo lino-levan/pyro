@@ -1,4 +1,4 @@
-import ChevronDown from "icons/chevron-down.tsx";
+import { ChevronDown } from "../../deps.ts";
 import type { RouteMap } from "./types.ts";
 
 function simplify(url: string) {

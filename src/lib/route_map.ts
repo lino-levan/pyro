@@ -1,5 +1,4 @@
-import { join, posix, resolve, win32 } from "std/path/mod.ts";
-import { extract } from "std/front_matter/any.ts";
+import { extract, join, posix, resolve, win32 } from "../../deps.ts";
 import { readFileSync } from "../utils.tsx";
 import type { RouteMap } from "./types.ts";
 

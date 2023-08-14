@@ -1,6 +1,5 @@
 import type { Config, FileTypes, JSX, Magic, RouteMap } from "./types.ts";
-import Github from "icons/brand-github.tsx";
-import ExternalLink from "icons/external-link.tsx";
+import { ExternalLink, Github } from "../../deps.ts";
 import { renderMD, renderMDX } from "../utils.tsx";
 import { Sidebar } from "./sidebar.tsx";
 

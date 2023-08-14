@@ -1,7 +1,7 @@
 // This file is for all of the "magic" autoconfig we do
 // For example, we select the background color from the logo
 // No config needed!
-import { decode } from "pngs";
+import { decode } from "../../deps.ts";
 import type { Magic } from "./types.ts";
 
 function saturation(r: number, g: number, b: number) {

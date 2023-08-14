@@ -1,7 +1,4 @@
-import remarkGfm from "remark-gfm";
-import rehypeHighlight from "rehype-prism";
-import { compile } from "mdx";
-import { render } from "gfm";
+import { compile, rehypeHighlight, remarkGfm, render } from "../deps.ts";
 import type {
   Config,
   FileTypes,
@@ -9,15 +6,6 @@ import type {
   Plugin,
   PluginResult,
 } from "./lib/types.ts";
-
-import "prism/components/prism-markdown?no-check";
-import "prism/components/prism-jsx?no-check";
-import "prism/components/prism-tsx?no-check";
-import "prism/components/prism-python?no-check";
-import "prism/components/prism-typescript?no-check";
-import "prism/components/prism-json?no-check";
-import "prism/components/prism-bash?no-check";
-import "prism/components/prism-yaml?no-check";
 
 /**
  * Read a file and return the file type and the file content
@@ -49,7 +37,7 @@ function removeFrontmatter(markdown: string) {
  */
 export async function renderMDX(data: string) {
   const compiled = (await compile(removeFrontmatter(data), {
-    jsxImportSource: "preact",
+    jsxImportSource: "https://esm.sh/preact@10.16.0",
     outputFormat: "program",
     remarkPlugins: [remarkGfm],
     rehypePlugins: [rehypeHighlight],

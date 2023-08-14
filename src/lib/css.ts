@@ -1,4 +1,4 @@
-import { KATEX_CSS } from "gfm";
+import { KATEX_CSS } from "../../deps.ts";
 
 // https://unpkg.com/@unocss/reset@0.54.1/tailwind.css
 const RESET_CSS = `/*

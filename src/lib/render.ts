@@ -1,17 +1,21 @@
-import { fromFileUrl, join, resolve, toFileUrl } from "std/path/mod.ts";
-import { extract } from "std/front_matter/any.ts";
-import { existsSync } from "std/fs/exists.ts";
-import { renderToString } from "preact-render-to-string";
-import * as esbuild from "esbuild";
-import { denoPlugins } from "esbuild_deno_loader";
+import {
+  createGenerator,
+  denoPlugins,
+  esbuild,
+  existsSync,
+  extract,
+  fromFileUrl,
+  join,
+  presetUno,
+  renderToString,
+  resolve,
+  toFileUrl,
+} from "../../deps.ts";
 
 import { Footer, Header, page } from "./page.tsx";
 import { get_route_map, resolve_file } from "./route_map.ts";
 import type { Config, Magic, PluginResult } from "./types.ts";
 import { getHeaderElements } from "../utils.tsx";
-
-import { createGenerator } from "@unocss/core";
-import { presetUno } from "@unocss/preset-uno";
 
 const uno = createGenerator({
   presets: [
@@ -52,14 +56,12 @@ export async function render(
     }
 
     const result = await esbuild.build({
-      plugins: [...denoPlugins({
-        configPath,
-      })],
+      plugins: [...denoPlugins()],
       entryPoints: [toFileUrl(entrypoint).href],
       bundle: true,
       write: false,
       format: "esm",
-      jsxImportSource: "preact",
+      jsxImportSource: "https://esm.sh/preact@10.16.0",
       jsx: "automatic",
     });
     const file = new TextDecoder().decode(result.outputFiles[0].contents);

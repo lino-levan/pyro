@@ -1,4 +1,4 @@
-import { join } from "std/path/mod.ts";
+import { join } from "../deps.ts";
 
 /**
  * Generate the skeleton for a pyro documentation site

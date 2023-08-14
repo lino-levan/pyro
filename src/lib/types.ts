@@ -1,5 +1,5 @@
-import type { JSX } from "preact";
-export type { JSX } from "preact";
+import type { JSX } from "../../deps.ts";
+export type { JSX } from "../../deps.ts";
 
 type MaybePromise<T> = T | Promise<T>;
 

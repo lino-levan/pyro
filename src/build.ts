@@ -1,9 +1,13 @@
-import { walkSync } from "std/fs/walk.ts";
-import { posix, resolve, win32 } from "std/path/mod.ts";
-import { parse } from "std/yaml/mod.ts";
-import * as esbuild from "esbuild";
+import {
+  copySync,
+  esbuild,
+  parse,
+  posix,
+  resolve,
+  walkSync,
+  win32,
+} from "../deps.ts";
 import { render } from "./lib/render.ts";
-import { copySync } from "std/fs/copy.ts";
 import { getMagic } from "./lib/magic.ts";
 import { CSS } from "./lib/css.ts";
 import { Config } from "./lib/types.ts";
