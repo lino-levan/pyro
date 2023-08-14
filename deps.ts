@@ -1,5 +1,5 @@
 export type { JSX } from "https://esm.sh/preact@10.16.0";
-export { renderToString } from "https://esm.sh/*preact-render-to-string@6.2.0";
+export { renderToString } from "https://esm.sh/preact-render-to-string@6.2.0";
 
 export {
   fromFileUrl,
