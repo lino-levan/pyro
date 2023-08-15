@@ -1,5 +1,4 @@
 import {
-  compile,
   rehypeStringify,
   remarkGfm,
   remarkParse,
@@ -38,21 +37,6 @@ export function readFileSync(...options: string[]): [FileTypes, string] {
 
 function removeFrontmatter(markdown: string) {
   return markdown.replace(/^---.+?---/s, "");
-}
-
-/**
- * Render MDX to HTML
- */
-export async function renderMDX(data: string) {
-  const compiled = (await compile(removeFrontmatter(data), {
-    jsxImportSource: "https://esm.sh/preact@10.16.0",
-    outputFormat: "program",
-    remarkPlugins: [remarkGfm],
-  })).value;
-
-  const mdx = await import("data:text/javascript," + compiled);
-
-  return mdx.default();
 }
 
 /**

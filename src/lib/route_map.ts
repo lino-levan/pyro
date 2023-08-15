@@ -5,10 +5,8 @@ import type { RouteMap } from "./types.ts";
 export function resolve_file(path: string) {
   return readFileSync(
     resolve(path + ".md"),
-    resolve(path + ".mdx"),
     resolve(path + ".tsx"),
     resolve(path, "index.md"),
-    resolve(path, "index.mdx"),
     resolve(path, "index.tsx"),
   );
 }

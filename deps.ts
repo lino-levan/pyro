@@ -49,5 +49,3 @@ export {
   type Node,
   type Root,
 } from "https://esm.sh/v131/@types/hast@3.0.0/index.d.ts";
-
-export { compile } from "https://esm.sh/@mdx-js/mdx@2.3.0";

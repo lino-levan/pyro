@@ -45,4 +45,4 @@ export interface RouteMap {
   sub_route_map?: RouteMap[];
 }
 
-export type FileTypes = "md" | "mdx" | "tsx";
+export type FileTypes = "md" | "tsx";

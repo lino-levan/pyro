@@ -1,6 +1,6 @@
 import type { Config, FileTypes, JSX, Magic, RouteMap } from "./types.ts";
 import { ExternalLink, Github } from "../../deps.ts";
-import { renderMD, renderMDX } from "../utils.tsx";
+import { renderMD } from "../utils.tsx";
 import { Sidebar } from "./sidebar.tsx";
 
 export function Header(props: {
@@ -169,20 +169,12 @@ export async function page(props: {
                 <h1 class="text-5xl font-bold text-gray-800 dark:text-gray-100">
                   {props.page.title}
                 </h1>
-                {props.options.file_type === "md"
-                  ? (
-                    <div
-                      class="markdown-body"
-                      dangerouslySetInnerHTML={{
-                        __html: await renderMD(props.options.markdown),
-                      }}
-                    />
-                  )
-                  : (
-                    <div class="markdown-body">
-                      {await renderMDX(props.options.markdown)}
-                    </div>
-                  )}
+                <div
+                  class="markdown-body"
+                  dangerouslySetInnerHTML={{
+                    __html: await renderMD(props.options.markdown),
+                  }}
+                />
               </div>
             </div>
             {props.options.config.footer && (
