@@ -1,4 +1,12 @@
-import { compile, rehypeHighlight, remarkGfm, render } from "../deps.ts";
+import {
+  compile,
+  rehypeStringify,
+  remarkGfm,
+  remarkParse,
+  remarkRehype,
+  unified,
+} from "../deps.ts";
+import { rehypeStarryNight } from "./lib/rehype_starry_night.ts";
 import type {
   Config,
   FileTypes,
@@ -40,7 +48,6 @@ export async function renderMDX(data: string) {
     jsxImportSource: "https://esm.sh/preact@10.16.0",
     outputFormat: "program",
     remarkPlugins: [remarkGfm],
-    rehypePlugins: [rehypeHighlight],
   })).value;
 
   const mdx = await import("data:text/javascript," + compiled);
@@ -51,11 +58,16 @@ export async function renderMDX(data: string) {
 /**
  * Render Markdown to HTML
  */
-// deno-lint-ignore require-await
 export async function renderMD(data: string) {
-  return render(removeFrontmatter(data), {
-    disableHtmlSanitization: true,
-  });
+  const file = await unified()
+    .use(remarkParse)
+    .use(remarkGfm)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeStarryNight)
+    .use(rehypeStringify, { allowDangerousHtml: true })
+    .process(removeFrontmatter(data));
+
+  return String(file);
 }
 
 /**

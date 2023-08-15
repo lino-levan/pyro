@@ -22,8 +22,6 @@ export { denoPlugins } from "https://deno.land/x/esbuild_deno_loader@0.8.1/mod.t
 export { createGenerator } from "https://esm.sh/@unocss/core@0.54.2";
 export { presetUno } from "https://esm.sh/@unocss/preset-uno@0.54.2";
 
-export { KATEX_CSS, render } from "https://deno.land/x/gfm@0.2.5/mod.ts";
-
 export { decode } from "https://deno.land/x/pngs@0.1.1/mod.ts";
 
 export { default as Github } from "https://deno.land/x/tabler_icons_tsx@0.0.4/tsx/brand-github.tsx";
@@ -32,15 +30,24 @@ export { default as ChevronDown } from "https://deno.land/x/tabler_icons_tsx@0.0
 
 export { Command } from "https://deno.land/x/cliffy@v1.0.0-rc.3/command/mod.ts";
 
+export { type Plugin, unified } from "https://esm.sh/unified@10.1.2";
+export { default as remarkParse } from "https://esm.sh/remark-parse@10.0.2";
 export { default as remarkGfm } from "https://esm.sh/remark-gfm@3.0.1";
-export { default as rehypeHighlight } from "https://esm.sh/@mapbox/rehype-prism@0.8.0";
-export { compile } from "https://esm.sh/@mdx-js/mdx@2.3.0";
+export { default as remarkRehype } from "https://esm.sh/remark-rehype@10.1.0";
+export { default as rehypeStringify } from "https://esm.sh/rehype-stringify@9.0.3";
 
-import "https://esm.sh/prismjs@1.29.0/components/prism-markdown?no-check";
-import "https://esm.sh/prismjs@1.29.0/components/prism-jsx?no-check";
-import "https://esm.sh/prismjs@1.29.0/components/prism-tsx?no-check";
-import "https://esm.sh/prismjs@1.29.0/components/prism-python?no-check";
-import "https://esm.sh/prismjs@1.29.0/components/prism-typescript?no-check";
-import "https://esm.sh/prismjs@1.29.0/components/prism-json?no-check";
-import "https://esm.sh/prismjs@1.29.0/components/prism-bash?no-check";
-import "https://esm.sh/prismjs@1.29.0/components/prism-yaml?no-check";
+export {
+  all,
+  createStarryNight,
+  type Grammar,
+} from "https://esm.sh/@wooorm/starry-night@2.1.1";
+export { toString } from "https://esm.sh/hast-util-to-string@2.0.0";
+export { visit } from "https://esm.sh/unist-util-visit@5.0.0";
+export {
+  type Element,
+  type ElementContent,
+  type Node,
+  type Root,
+} from "https://esm.sh/v131/@types/hast@3.0.0/index.d.ts";
+
+export { compile } from "https://esm.sh/@mdx-js/mdx@2.3.0";
