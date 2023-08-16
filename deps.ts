@@ -1,5 +1,5 @@
-export type { JSX } from "https://esm.sh/preact@10.16.0";
-export { renderToString } from "https://esm.sh/preact-render-to-string@6.2.0";
+export type { JSX } from "https://esm.sh/preact@10.17.0";
+export { renderToString } from "https://esm.sh/preact-render-to-string@6.2.1";
 
 export {
   fromFileUrl,
@@ -19,8 +19,8 @@ export { existsSync } from "https://deno.land/std@0.198.0/fs/exists.ts";
 export * as esbuild from "https://deno.land/x/esbuild@v0.17.19/mod.js";
 export { denoPlugins } from "https://deno.land/x/esbuild_deno_loader@0.8.1/mod.ts";
 
-export { createGenerator } from "https://esm.sh/@unocss/core@0.54.2";
-export { presetUno } from "https://esm.sh/@unocss/preset-uno@0.54.2";
+export { createGenerator } from "https://esm.sh/@unocss/core@0.55.1";
+export { presetUno } from "https://esm.sh/@unocss/preset-uno@0.55.1";
 
 export { decode } from "https://deno.land/x/pngs@0.1.1/mod.ts";
 
@@ -30,7 +30,7 @@ export { default as ChevronDown } from "https://deno.land/x/tabler_icons_tsx@0.0
 
 export { Command } from "https://deno.land/x/cliffy@v1.0.0-rc.3/command/mod.ts";
 
-export { type Plugin, unified } from "https://esm.sh/unified@10.1.2";
+export { type Plugin, unified } from "https://esm.sh/unified@11.0.0";
 export { default as remarkParse } from "https://esm.sh/remark-parse@10.0.2";
 export { default as remarkGfm } from "https://esm.sh/remark-gfm@3.0.1";
 export { default as remarkRehype } from "https://esm.sh/remark-rehype@10.1.0";

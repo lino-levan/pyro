@@ -1,8 +1,13 @@
 import {
+  denoPlugins,
+  esbuild,
+  existsSync,
   rehypeStringify,
   remarkGfm,
   remarkParse,
   remarkRehype,
+  resolve,
+  toFileUrl,
   unified,
 } from "../deps.ts";
 import { rehypeStarryNight } from "./lib/rehype_starry_night.ts";
@@ -100,4 +105,31 @@ export function getHeaderElements(config: Config, plugins: PluginResult[]) {
   }
 
   return header;
+}
+
+export async function importBuild(entrypoint: string) {
+  entrypoint = resolve(entrypoint);
+
+  let configPath: string | undefined = undefined;
+
+  if (existsSync("./deno.json")) {
+    configPath = resolve("./deno.json");
+  } else if (existsSync("./deno.jsonc")) {
+    configPath = resolve("./deno.jsonc");
+  }
+
+  const result = await esbuild.build({
+    plugins: [...denoPlugins({ configPath })],
+    entryPoints: [toFileUrl(entrypoint).href],
+    bundle: true,
+    write: false,
+    format: "esm",
+    jsxImportSource: "https://esm.sh/preact@10.17.0",
+    jsx: "automatic",
+  });
+  const file = new TextDecoder().decode(result.outputFiles[0].contents);
+
+  return await import(
+    "data:text/javascript;base64," + btoa(file)
+  );
 }

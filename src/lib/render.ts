@@ -1,28 +1,29 @@
 import {
   createGenerator,
-  denoPlugins,
-  esbuild,
   existsSync,
   extract,
   join,
   presetUno,
   renderToString,
   resolve,
-  toFileUrl,
 } from "../../deps.ts";
 
 import { Footer, Header, page } from "./page.tsx";
 import { get_route_map, resolve_file } from "./route_map.ts";
 import type { Config, Magic, PluginResult } from "./types.ts";
-import { getHeaderElements } from "../utils.tsx";
+import { getHeaderElements, importBuild } from "../utils.tsx";
 
-const uno = createGenerator({
-  presets: [
-    presetUno({
-      dark: "media",
-    }),
-  ],
-});
+const unoConfig = existsSync("./uno.config.ts")
+  ? (await importBuild("./uno.config.ts")).default
+  : {
+    presets: [
+      presetUno({
+        dark: "media",
+      }),
+    ],
+  };
+
+const uno = createGenerator(unoConfig);
 
 async function applyUno(html: string) {
   // Apply uno
@@ -48,27 +49,8 @@ export async function render(
     const indexPath = join(base_path, "index.tsx");
     const entrypoint = existsSync(indexPath) ? indexPath : base_path + ".tsx";
 
-    let configPath: string | undefined = undefined;
-
-    if (existsSync("./deno.json")) {
-      configPath = resolve("./deno.json");
-    } else if (existsSync("./deno.jsonc")) {
-      configPath = resolve("./deno.jsonc");
-    }
-
-    const result = await esbuild.build({
-      plugins: [...denoPlugins({ configPath })],
-      entryPoints: [toFileUrl(entrypoint).href],
-      bundle: true,
-      write: false,
-      format: "esm",
-      jsxImportSource: "https://esm.sh/preact@10.16.0",
-      jsx: "automatic",
-    });
-    const file = new TextDecoder().decode(result.outputFiles[0].contents);
-
-    const { default: userPage, config: userConfig } = await import(
-      "data:text/javascript;base64," + btoa(file)
+    const { default: userPage, config: userConfig } = await importBuild(
+      entrypoint,
     );
 
     return await applyUno(
