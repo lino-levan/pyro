@@ -4,7 +4,6 @@ import {
   esbuild,
   existsSync,
   extract,
-  fromFileUrl,
   join,
   presetUno,
   renderToString,
@@ -49,14 +48,16 @@ export async function render(
     const indexPath = join(base_path, "index.tsx");
     const entrypoint = existsSync(indexPath) ? indexPath : base_path + ".tsx";
 
-    let configPath = import.meta.resolve("../../deno.jsonc");
+    let configPath: string | undefined = undefined;
 
-    if (configPath.startsWith("file:")) {
-      configPath = fromFileUrl(configPath);
+    if (existsSync("./deno.json")) {
+      configPath = resolve("./deno.json");
+    } else if (existsSync("./deno.jsonc")) {
+      configPath = resolve("./deno.jsonc");
     }
 
     const result = await esbuild.build({
-      plugins: [...denoPlugins()],
+      plugins: [...denoPlugins({ configPath })],
       entryPoints: [toFileUrl(entrypoint).href],
       bundle: true,
       write: false,

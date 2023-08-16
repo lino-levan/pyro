@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "icons/": "https://deno.land/x/tabler_icons_tsx@0.0.4/tsx/"
+  }
+}
