@@ -1,7 +1,12 @@
 {
   "tasks": {
     "install": "deno run -Ar install.ts .",
-    "dev": "cd www && pyro dev"
+    "dev": "cd www && pyro dev",
+
+    // test building websites
+    "test:deno_json": "cd tests/end_to_end/deno_json && pyro build && cd ../../..",
+    "test:production": "cd www && pyro build && cd ..",
+    "test": "deno task test:production && deno task test:deno_json"
   },
   "compilerOptions": {
     "jsx": "react-jsx",

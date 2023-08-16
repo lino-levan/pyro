@@ -31,6 +31,5 @@ jobs:
       - name: install pyro
         run: deno task install
 
-      - name: Build the website
-        working-directory: ./www
-        run: pyro build
+      - name: Run tests
+        run: deno task test

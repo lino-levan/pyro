@@ -1,4 +1,4 @@
-import IconArrowRight from "icons/arrow-right.tsx";
+import IconArrowRight from "https://deno.land/x/tabler_icons_tsx@0.0.4/tsx/arrow-right.tsx";
 import { type PageProps } from "../../page.ts";
 
 export const config = {
