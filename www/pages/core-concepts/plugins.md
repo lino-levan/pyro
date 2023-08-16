@@ -1,7 +1,7 @@
 ---
 title: Plugins
 description: Pyro was designed from the ground up to be no-config and incredibly fast.
-index: 3
+index: 4
 ---
 
 While Pyro is designed to have all of the basic features you will need built-in,
