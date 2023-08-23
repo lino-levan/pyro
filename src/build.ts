@@ -32,7 +32,7 @@ async function screenshot() {
   });
   const page = await browser.newPage();
   const celestial = page.unsafelyGetCelestialBindings();
-  await celestial.Emulation.setScrollbarsHidden({ hidden: true })
+  await celestial.Emulation.setScrollbarsHidden({ hidden: true });
 
   for (
     const entry of walkSync("./build", {
