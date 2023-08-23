@@ -26,7 +26,9 @@ async function screenshot() {
     });
   });
 
-  const browser = await launch();
+  const browser = await launch({
+    args: [`--window-size=1920,1080`],
+  });
   const page = await browser.newPage();
 
   for (
@@ -37,7 +39,7 @@ async function screenshot() {
   ) {
     const url = new URL(entry.path.slice(5, -10), `http://localhost:${port}`);
     console.log("Embedding:", url.href);
-    await page.goto(url.href);
+    await page.goto(url.href, { waitUntil: "networkidle0" });
     const screenshot = await page.screenshot();
     Deno.writeFileSync(
       resolve(entry.path.slice(0, -10), "embed.png"),
