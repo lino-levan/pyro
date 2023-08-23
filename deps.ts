@@ -1,4 +1,4 @@
-export type { JSX } from "https://esm.sh/preact@10.17.0";
+export type { JSX } from "https://esm.sh/preact@10.17.1";
 export { renderToString } from "https://esm.sh/preact-render-to-string@6.2.1";
 
 export {
@@ -8,19 +8,21 @@ export {
   resolve,
   toFileUrl,
   win32,
-} from "https://deno.land/std@0.198.0/path/mod.ts";
-export { walkSync } from "https://deno.land/std@0.198.0/fs/walk.ts";
-export { parse } from "https://deno.land/std@0.198.0/yaml/mod.ts";
-export { copySync } from "https://deno.land/std@0.198.0/fs/copy.ts";
-export { serveDir } from "https://deno.land/std@0.198.0/http/file_server.ts";
-export { extract } from "https://deno.land/std@0.198.0/front_matter/any.ts";
-export { existsSync } from "https://deno.land/std@0.198.0/fs/exists.ts";
+} from "https://deno.land/std@0.199.0/path/mod.ts";
+export { walkSync } from "https://deno.land/std@0.199.0/fs/walk.ts";
+export { parse as parseYaml } from "https://deno.land/std@0.199.0/yaml/mod.ts";
+export { parse as parseJsonc } from "https://deno.land/std@0.199.0/jsonc/mod.ts";
+export { parse as parseToml } from "https://deno.land/std@0.199.0/toml/mod.ts";
+export { copySync } from "https://deno.land/std@0.199.0/fs/copy.ts";
+export { serveDir } from "https://deno.land/std@0.199.0/http/file_server.ts";
+export { extract } from "https://deno.land/std@0.199.0/front_matter/any.ts";
+export { existsSync } from "https://deno.land/std@0.199.0/fs/exists.ts";
 
 export * as esbuild from "https://deno.land/x/esbuild@v0.17.19/mod.js";
 export { denoPlugins } from "https://deno.land/x/esbuild_deno_loader@0.8.1/mod.ts";
 
-export { createGenerator } from "https://esm.sh/@unocss/core@0.55.1";
-export { presetUno } from "https://esm.sh/@unocss/preset-uno@0.55.1";
+export { createGenerator } from "https://esm.sh/@unocss/core@0.55.2";
+export { presetUno } from "https://esm.sh/@unocss/preset-uno@0.55.2";
 
 export { decode } from "https://deno.land/x/pngs@0.1.1/mod.ts";
 

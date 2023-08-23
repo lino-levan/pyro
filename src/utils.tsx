@@ -2,6 +2,9 @@ import {
   denoPlugins,
   esbuild,
   existsSync,
+  parseJsonc,
+  parseToml,
+  parseYaml,
   rehypeStringify,
   remarkGfm,
   remarkParse,
@@ -38,6 +41,28 @@ export function readFileSync(...options: string[]): [FileTypes, string] {
     options.shift();
     return readFileSync(...options);
   }
+}
+
+export function readConfig(): Config {
+  let extension;
+  if (existsSync("pyro.yml")) extension = "yml";
+  if (existsSync("pyro.yaml")) extension = "yaml";
+  if (existsSync("pyro.json")) extension = "json";
+  if (existsSync("pyro.jsonc")) extension = "jsonc";
+  if (existsSync("pyro.toml")) extension = "toml";
+
+  const file = Deno.readTextFileSync(`pyro.${extension}`);
+
+  if (extension === "yml" || extension === "yaml") {
+    return parseYaml(file) as Config;
+  } else if (extension === "json") {
+    return JSON.parse(file);
+  } else if (extension === "jsonc") {
+    return parseJsonc(file) as unknown as Config;
+  } else if (extension === "toml") {
+    return parseToml(file) as unknown as Config;
+  }
+  throw new Error("No Pyro configuration file found. Try making a `pyro.yml`");
 }
 
 function removeFrontmatter(markdown: string) {

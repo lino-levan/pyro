@@ -5,12 +5,14 @@ index: 1
 ---
 
 Pyro has a very simplistic view of configurations, there is only one file you
-need to worry about (being `pyro.yml`).
+need to worry about (being `pyro.yml`/`pyro.toml`/`pyro.json`/`pyro.jsonc`).
 
-## What goes into a `pyro.yml`?
+## What goes into a Pyro configuration file?
 
-This is just a standard yaml configuration file. Inside you will define all
+This is just a standard configuration file. Inside you will define all
 properties related to pyro and plugins you may install.
+
+This is an example of a `pyro.yml` configuration file:
 
 ```yaml
 # The title of the site
@@ -55,7 +57,7 @@ plugin:
 ## How do I configure individual pages?
 
 You can configure individual page metadata using markdown frontmatter. We
-support yaml/toml/json.
+support yaml/toml/json/jsonc.
 
 Here is an example in YAML:
 

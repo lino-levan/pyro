@@ -1,17 +1,8 @@
-import {
-  copySync,
-  esbuild,
-  parse,
-  posix,
-  resolve,
-  walkSync,
-  win32,
-} from "../deps.ts";
+import { copySync, esbuild, posix, resolve, walkSync, win32 } from "../deps.ts";
 import { render } from "./lib/render.ts";
 import { getMagic } from "./lib/magic.ts";
 import { CSS } from "./lib/css.ts";
-import { Config } from "./lib/types.ts";
-import { loadPlugins } from "./utils.tsx";
+import { loadPlugins, readConfig } from "./utils.tsx";
 
 export async function build() {
   try {
@@ -27,7 +18,7 @@ export async function build() {
   Deno.mkdirSync("./build/_pyro");
   Deno.writeTextFileSync("./build/_pyro/bundle.css", CSS);
 
-  const config = parse(Deno.readTextFileSync("pyro.yml")) as Config;
+  const config = readConfig();
   const magic = getMagic();
   const plugins = config.plugins ? await loadPlugins(config.plugins) : [];
 

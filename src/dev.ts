@@ -1,12 +1,10 @@
-import { parse, resolve, serveDir } from "../deps.ts";
+import { resolve, serveDir } from "../deps.ts";
 import { render } from "./lib/render.ts";
 import { getMagic } from "./lib/magic.ts";
 import { CSS } from "./lib/css.ts";
-import { Config } from "./lib/types.ts";
-import { loadPlugins } from "./utils.tsx";
+import { loadPlugins, readConfig } from "./utils.tsx";
 
 export async function dev(hostname = "0.0.0.0", port = 8000) {
-  const config = parse(Deno.readTextFileSync("pyro.yml")) as Config;
   let BUILD_ID = Math.random().toString();
 
   Deno.serve({
@@ -16,6 +14,7 @@ export async function dev(hostname = "0.0.0.0", port = 8000) {
     const url = new URL(req.url);
     const pathname = url.pathname;
 
+    const config = readConfig();
     const plugins = config.plugins ? await loadPlugins(config.plugins) : [];
 
     for (const plugin of plugins) {
