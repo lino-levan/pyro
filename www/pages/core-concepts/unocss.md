@@ -8,7 +8,7 @@ Pyro uses UnoCSS for styling, both internally and for user code. By default, the
 configuration that Pyro uses for UnoCSS looks something like:
 
 ```ts
-import { defineConfig, presetUno } from "https://esm.sh/unocss@0.55.1";
+import { defineConfig, presetUno } from "https://esm.sh/unocss@0.55.2";
 
 export default defineConfig({
   presets: [
@@ -30,7 +30,7 @@ import {
   defineConfig,
   presetTypography,
   presetUno,
-} from "https://esm.sh/unocss@0.55.1";
+} from "https://esm.sh/unocss@0.55.2";
 
 export default defineConfig({
   presets: [
