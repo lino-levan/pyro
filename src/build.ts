@@ -26,10 +26,13 @@ async function screenshot() {
     });
   });
 
+  // TODO(lino-levan): Just do this better. What is this?
   const browser = await launch({
     args: [`--window-size=1920,1080`],
   });
   const page = await browser.newPage();
+  const celestial = page.unsafelyGetCelestialBindings();
+  await celestial.Emulation.setScrollbarsHidden({ hidden: true })
 
   for (
     const entry of walkSync("./build", {
