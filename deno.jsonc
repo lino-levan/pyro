@@ -5,9 +5,10 @@
 
     // test building websites
     "test:deno_json": "cd tests/end_to_end/deno_json && pyro build && cd ../../..",
+    "test:json_config": "cd tests/end_to_end/json_config && pyro build && cd ../../..",
     "test:unocss": "cd tests/end_to_end/unocss && pyro build && cd ../../..",
     "test:production": "cd www && pyro build && cd ..",
-    "test": "deno task test:production && deno task test:deno_json && deno task test:unocss"
+    "test": "deno task test:production && deno task test:json_config && deno task test:deno_json && deno task test:unocss"
   },
   "compilerOptions": {
     "jsx": "react-jsx",
