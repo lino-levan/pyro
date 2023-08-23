@@ -129,7 +129,7 @@ Me</button>
 <button class="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded" onClick="alert('hi!')">Click
 Me</button>
 
-## Seperator
+## Separator
 
 ```md
 ---
