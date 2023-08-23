@@ -129,11 +129,12 @@ export async function page(props: {
         <meta name="viewport" content="width=device-width" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
-          name="twitter:title"
+          name="og:title"
           content={`${props.page.title} | ${props.options.config.title}`}
         />
-        <meta name="twitter:description" content={props.page.description} />
-        <meta name="twitter:image" content="screenshot.png" />
+        <meta name="og:description" content={props.page.description} />
+        <meta name="og:image" content="screenshot.png" />
+        <meta name="theme-color" content={props.options.magic.background} />
         <link rel="icon" type="image/png" href="/icon.png" />
         {props.options.dev && <script src="/_pyro/reload.js" />}
       </head>
