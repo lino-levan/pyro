@@ -1,8 +1,55 @@
-import { copySync, esbuild, posix, resolve, walkSync, win32 } from "../deps.ts";
+import {
+  copySync,
+  esbuild,
+  launch,
+  posix,
+  resolve,
+  serveDir,
+  walkSync,
+  win32,
+} from "../deps.ts";
 import { render } from "./lib/render.ts";
 import { getMagic } from "./lib/magic.ts";
 import { CSS } from "./lib/css.ts";
 import { loadPlugins, readConfig } from "./utils.tsx";
+
+async function screenshot() {
+  console.log("Embedding pages...");
+
+  const controller = new AbortController();
+  const port = 8412;
+
+  const server = Deno.serve({ signal: controller.signal, port }, (req) => {
+    return serveDir(req, {
+      fsRoot: "build",
+      quiet: true,
+    });
+  });
+
+  const browser = await launch();
+  const page = await browser.newPage();
+
+  for (
+    const entry of walkSync("./build", {
+      includeDirs: false,
+      match: [/^.+index\.html$/],
+    })
+  ) {
+    const url = new URL(entry.path.slice(5, -10), `http://localhost:${port}`);
+    console.log("Embedding:", url.href);
+    await page.goto(url.href);
+    const screenshot = await page.screenshot();
+    Deno.writeFileSync(
+      resolve(entry.path.slice(0, -10), "screenshot.png"),
+      screenshot,
+    );
+  }
+
+  await browser.close();
+
+  controller.abort();
+  await server.finished;
+}
 
 export async function build() {
   try {
@@ -63,4 +110,6 @@ export async function build() {
   }
 
   esbuild.stop();
+
+  await screenshot();
 }

@@ -18,6 +18,8 @@ export { serveDir } from "https://deno.land/std@0.199.0/http/file_server.ts";
 export { extract } from "https://deno.land/std@0.199.0/front_matter/any.ts";
 export { existsSync } from "https://deno.land/std@0.199.0/fs/exists.ts";
 
+export { launch } from "https://deno.land/x/astral@0.2.3/mod.ts";
+
 export * as esbuild from "https://deno.land/x/esbuild@v0.17.19/mod.js";
 export { denoPlugins } from "https://deno.land/x/esbuild_deno_loader@0.8.1/mod.ts";
 
