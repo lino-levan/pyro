@@ -1,5 +1,6 @@
 title: Pyro
 github: https://github.com/lino-levan/pyro
+base: https://pyro.deno.dev
 copyright: |-
   Copyright © 2023 Lino Le Van
   MIT Licensed

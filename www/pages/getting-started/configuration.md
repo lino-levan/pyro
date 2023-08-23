@@ -18,6 +18,9 @@ This is an example of a `pyro.yml` configuration file:
 # The title of the site
 title: Pyro
 
+# The base URL to use for open graph absolute URLs (optional)
+base: https://pyro.deno.dev
+
 # The Github repository for the documentation site (optional)
 github: https://github.com/lino-levan/pyro
 

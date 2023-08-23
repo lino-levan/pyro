@@ -1,5 +1,5 @@
 import type { Config, FileTypes, JSX, Magic, RouteMap } from "./types.ts";
-import { ExternalLink, Github } from "../../deps.ts";
+import { ExternalLink, Github, posix } from "../../deps.ts";
 import { renderMD } from "../utils.tsx";
 import { Sidebar } from "./sidebar.tsx";
 
@@ -111,6 +111,7 @@ export async function page(props: {
       right: JSX.Element[];
     };
   } | {
+    route: string;
     config: Config;
     body: string;
     dev: boolean;
@@ -133,7 +134,15 @@ export async function page(props: {
           content={`${props.page.title} | ${props.options.config.title}`}
         />
         <meta name="og:description" content={props.page.description} />
-        <meta name="og:image" content="screenshot.png" />
+        {props.options.config.base && !props.options.dev && (
+          <meta
+            name="og:image"
+            content={new URL(
+              posix.join(props.options.route, "embed.png"),
+              props.options.config.base,
+            ).href}
+          />
+        )}
         <meta name="theme-color" content={props.options.magic.background} />
         <link rel="icon" type="image/png" href="/icon.png" />
         {props.options.dev && <script src="/_pyro/reload.js" />}

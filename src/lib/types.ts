@@ -5,6 +5,7 @@ type MaybePromise<T> = T | Promise<T>;
 
 export interface Config {
   title: string;
+  base?: string;
   github?: string;
   copyright?: string;
   header?: { left?: string[]; right?: string[] };

@@ -58,6 +58,7 @@ export async function render(
         await page({
           page: { title: config.title, description: userConfig.description },
           options: {
+            route: "/" + path,
             config,
             dev,
             magic,

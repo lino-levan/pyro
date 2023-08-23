@@ -40,7 +40,7 @@ async function screenshot() {
     await page.goto(url.href);
     const screenshot = await page.screenshot();
     Deno.writeFileSync(
-      resolve(entry.path.slice(0, -10), "screenshot.png"),
+      resolve(entry.path.slice(0, -10), "embed.png"),
       screenshot,
     );
   }
@@ -111,5 +111,7 @@ export async function build() {
 
   esbuild.stop();
 
-  await screenshot();
+  if (config.base) {
+    await screenshot();
+  }
 }

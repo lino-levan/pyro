@@ -21,12 +21,17 @@ function saturation(r: number, g: number, b: number) {
   }
 }
 
+function componentToHex(c: number) {
+  const hex = c.toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
+}
+
 function getBackground() {
   try {
     const logo = Deno.readFileSync("./static/icon.png");
     const bytes = decode(logo);
 
-    let brightest_color = "rgb(0,0,0)";
+    let brightest_color = "#000000";
     let max_brightness = 0;
 
     for (let i = 0; i < bytes.image.length; i += 4) {
@@ -40,7 +45,9 @@ function getBackground() {
 
       if (brightness > max_brightness) {
         max_brightness = brightness;
-        brightest_color = `rgb(${r}, ${g}, ${b})`;
+        brightest_color = `#${componentToHex(r)}${componentToHex(g)}${
+          componentToHex(b)
+        }`;
       }
     }
 
