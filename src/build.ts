@@ -110,7 +110,7 @@ export async function build() {
     Deno.mkdirSync(resolve("build", folder), { recursive: true });
     Deno.writeTextFileSync(
       resolve("build", folder, "index.html"),
-      await render(config, magic, folder, plugins),
+      await render(magic, folder, plugins),
     );
   }
 

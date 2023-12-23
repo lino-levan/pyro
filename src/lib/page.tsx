@@ -1,5 +1,5 @@
 import type { Config, FileTypes, JSX, Magic, RouteMap } from "./types.ts";
-import { ExternalLink, Github, posix } from "../../deps.ts";
+import { ExternalLink, Github, IconMenu2, posix } from "../../deps.ts";
 import { renderMD } from "../utils.tsx";
 import { Sidebar } from "./sidebar.tsx";
 
@@ -13,9 +13,20 @@ export function Header(props: {
 }) {
   return (
     <header class="w-full h-16 shadow-sm flex gap-4 items-center px-4 bg-white dark:bg-black text-gray-800 dark:text-gray-200 z-10">
+      <details class="sm:hidden">
+        <summary class="text-black dark:text-white hover:text-gray-800 dark:hover:text-gray-300">
+          <IconMenu2 />
+        </summary>
+        <div class="bg-white dark:bg-black absolute top-0 left-0 h-screen">
+          <Sidebar
+            class="w-64 p-2 border-r border-gray-200 dark:border-gray-700 pt-4 flex flex-col gap-2"
+            route="TOP"
+          />
+        </div>
+      </details>
       <a href="/">
         <h1 class="font-semibold text-lg text-gray-800 flex items-center gap-2 dark:text-gray-200 mr-4">
-          <image src="/icon.png" class="w-8 h-8" />
+          <img src="/icon.png" class="w-8 h-8" />
           {props.title}
         </h1>
       </a>
@@ -25,7 +36,7 @@ export function Header(props: {
         {props.github && (
           <a
             target="_blank"
-            class="text-black dark:text-white"
+            class="text-black dark:text-white hover:text-gray-800 dark:hover:text-gray-300"
             href={props.github}
           >
             <Github />
@@ -45,12 +56,12 @@ export function Footer(
 ) {
   return (
     <footer class="px-4 py-12 w-full flex justify-center text-gray-800 dark:text-gray-200 border-t dark:border-gray-700 bg-white dark:bg-black">
-      <div class="max-w-screen-lg w-full flex flex-wrap justify-around">
+      <div class="max-w-screen-lg w-full flex flex-col sm:flex-row flex-wrap justify-around">
         <image src="/icon.png" class="w-8 h-8" />
         {Object.entries(props.footer).map((
           [name, value],
         ) => (
-          <div>
+          <div class="py-4 sm:py-0">
             <p class="font-bold pb-4">{name}</p>
             <ul class="flex flex-col gap-2">
               {value.map((value) => (
@@ -69,7 +80,7 @@ export function Footer(
             </ul>
           </div>
         ))}
-        <div class="h-full flex flex-col justify-around">
+        <div class="py-4 sm:h-full flex flex-row-reverse sm:flex-col justify-around">
           {props.copyright && (
             <p class="whitespace-pre text-gray-500 dark:text-gray-400 text-sm">
               {props.copyright}
@@ -82,7 +93,7 @@ export function Footer(
                 class="w-min"
                 href={props.github}
               >
-                <Github class="text-gray-500 hover:text-gray-900" />
+                <Github class="text-gray-500 hover:text-gray-900 dark:hover:text-gray-300" />
               </a>
             )}
           </div>
@@ -100,7 +111,6 @@ export async function page(props: {
   };
   options: {
     markdown: string;
-    route_map: RouteMap[];
     route: string;
     config: Config;
     magic: Magic;
@@ -171,12 +181,11 @@ export async function page(props: {
             >
               {!hide_navbar && (
                 <Sidebar
-                  class="w-64 p-2 border-r border-gray-200 dark:border-gray-700 pt-4 flex flex-col gap-2"
-                  route_map={props.options.route_map}
+                  class="w-64 p-2 border-r border-gray-200 dark:border-gray-700 pt-4 hidden sm:flex flex-col gap-2"
                   route={props.options.route}
                 />
               )}
-              <div class="flex-grow max-w-screen-lg flex flex-col gap-8 py-4 overflow-hidden">
+              <div class="flex-grow max-w-screen-lg flex flex-col gap-8 py-4 px-4 overflow-hidden">
                 <h1 class="text-5xl font-bold text-gray-800 dark:text-gray-100">
                   {props.page.title}
                 </h1>

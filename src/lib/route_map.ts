@@ -11,8 +11,10 @@ export function resolve_file(path: string) {
   );
 }
 
+export let global_route_map: RouteMap[] = [];
+
 export function get_route_map(directory: string, top_level = false) {
-  const route_map: RouteMap[] = [];
+  const route_map = [];
 
   for (const entry of Deno.readDirSync(directory)) {
     if (entry.name.startsWith("_")) continue;
@@ -50,6 +52,10 @@ export function get_route_map(directory: string, top_level = false) {
   }
 
   route_map.sort((a, b) => a.index - b.index);
+
+  if (top_level) {
+    global_route_map = route_map;
+  }
 
   return route_map;
 }

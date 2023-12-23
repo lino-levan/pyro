@@ -1,16 +1,28 @@
 import { ChevronDown } from "../../deps.ts";
 import type { RouteMap } from "./types.ts";
+import { global_route_map } from "./route_map.ts";
+import { readConfig } from "../utils.tsx";
 
 function simplify(url: string) {
   return url.replaceAll("/", "").replaceAll("-", "");
 }
 
 export function Sidebar(
-  props: { route_map: RouteMap[]; class: string; route: string },
+  props: { route_map?: RouteMap[]; class: string; route: string },
 ) {
+  const config = readConfig();
+  const route_map = props.route_map ?? global_route_map;
   return (
     <div class={props.class}>
-      {props.route_map.map((route) => (
+      {!props.route_map && (
+        <a href="/">
+          <h1 class="font-semibold text-lg text-gray-800 dark:text-gray-200 flex items-center gap-2 mr-4">
+            <img src="/icon.png" class="w-8 h-8" />
+            {config.title}
+          </h1>
+        </a>
+      )}
+      {route_map.map((route) => (
         <>
           {route.sub_route_map
             ? (
