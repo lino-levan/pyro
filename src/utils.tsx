@@ -149,12 +149,11 @@ export async function importBuild(entrypoint: string) {
     bundle: true,
     write: false,
     format: "esm",
-    jsxImportSource: "https://esm.sh/preact@10.17.0",
+    jsxImportSource: "https://esm.sh/preact@10.19.3",
     jsx: "automatic",
   });
-  const file = new TextDecoder().decode(result.outputFiles[0].contents);
 
-  return await import(
-    "data:text/javascript;base64," + btoa(file)
-  );
+  const tempFilePath = await Deno.makeTempFile();
+  await Deno.writeFile(tempFilePath, result.outputFiles[0].contents);
+  return await import(tempFilePath);
 }
