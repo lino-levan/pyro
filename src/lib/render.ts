@@ -11,7 +11,7 @@ import {
 import { Footer, Header, page } from "./page.tsx";
 import { get_route_map, resolve_file } from "./route_map.ts";
 import type { Config, Magic, PluginResult } from "./types.ts";
-import { getHeaderElements, importBuild } from "../utils.tsx";
+import { getHeaderElements, importBuild, readConfig } from "../utils.tsx";
 
 const unoConfig = existsSync("./uno.config.ts")
   ? (await importBuild("./uno.config.ts")).default
@@ -36,12 +36,12 @@ async function applyUno(html: string) {
 }
 
 export async function render(
-  config: Config,
   magic: Magic,
   path: string,
   plugins: PluginResult[],
   dev = false,
 ) {
+  const config = readConfig();
   const base_path = resolve("pages", path);
   const [file_type, markdown] = resolve_file(base_path);
 
@@ -85,7 +85,7 @@ export async function render(
   }
 
   const frontmatter = extract(markdown);
-  const route_map = get_route_map(resolve("pages"), true);
+  get_route_map(resolve("pages"), true);
 
   const title = frontmatter.attrs.title as string ?? "No Title";
   const description = frontmatter.attrs.description as string ??
@@ -99,7 +99,6 @@ export async function render(
       page: { title, description, hide_navbar },
       options: {
         markdown,
-        route_map,
         route: "/" + path,
         config,
         magic,

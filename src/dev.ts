@@ -92,7 +92,6 @@ export async function dev(hostname = "0.0.0.0", port = 8000) {
 
     return new Response(
       await render(
-        config,
         getMagic(),
         resolve("pages", pathname.slice(1)),
         plugins,
