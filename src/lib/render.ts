@@ -10,7 +10,7 @@ import {
 
 import { Footer, Header, page } from "./page.tsx";
 import { get_route_map, resolve_file } from "./route_map.ts";
-import type { Config, Magic, PluginResult } from "./types.ts";
+import type { Magic, PluginResult } from "./types.ts";
 import { getHeaderElements, importBuild, readConfig } from "../utils.tsx";
 
 const unoConfig = existsSync("./uno.config.ts")
