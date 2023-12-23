@@ -20,7 +20,7 @@ export function Header(props: {
         <div class="bg-white dark:bg-black absolute top-0 left-0 h-screen">
           <Sidebar
             class="w-64 p-2 border-r border-gray-200 dark:border-gray-700 pt-4 flex flex-col gap-2"
-            route="TOP"
+            route="_PYRO_SHOW_LOGO"
           />
         </div>
       </details>

@@ -14,7 +14,7 @@ export function Sidebar(
   const route_map = props.route_map ?? global_route_map;
   return (
     <div class={props.class}>
-      {!props.route_map && (
+      {(!props.route_map && props.route === "_PYRO_SHOW_LOGO") && (
         <a href="/">
           <h1 class="font-semibold text-lg text-gray-800 dark:text-gray-200 flex items-center gap-2 mr-4">
             <img src="/icon.png" class="w-8 h-8" />
