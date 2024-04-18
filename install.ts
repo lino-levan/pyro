@@ -21,7 +21,7 @@ if (install_from === ".") {
 const command = new Deno.Command(Deno.execPath(), {
   args: [
     "install",
-    "-Afr",
+    "-Afrg",
     "--config",
     config_file,
     "-n",
